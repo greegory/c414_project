@@ -9,8 +9,9 @@
 
 #import "CC3Layer.h"
 
-
 /** A sample application-specific CC3Layer subclass. */
-@interface Cmput3DLayer : CC3Layer {}
+@interface Cmput3DLayer : CC3Layer {
+
+}
 
 @end

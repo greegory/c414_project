@@ -7,19 +7,82 @@
 //
 
 #import "Cmput3DWorld.h"
+#import "Cmput3DMenuLayer.h"
 #import "CC3PODResourceNode.h"
 #import "CC3ActionInterval.h"
 #import "CC3MeshNode.h"
 #import "CC3Camera.h"
 #import "CC3Light.h"
 
+#import "CC3ActionInterval.h"
+#import "CC3MeshNode.h"
+#import "CC3PODResourceNode.h"
+#import "CCNode.h"
+#import "CC3ParametricMeshNodes.h"
 
 @implementation Cmput3DWorld
+
+@synthesize templateNodes;
 
 -(void) dealloc {
 	[super dealloc];
 }
 
+-(id) init {
+    
+    if ((self = [super init])){
+        
+    }
+    return self;
+}
+
+
+-(void) initializeTemplates {
+	CC3MeshNode* mn;
+	CC3ResourceNode* rezNode;
+    
+    templateNodes = [[NSMutableArray array] retain];
+    
+	// Ball models from POD resource.
+	rezNode = [CC3PODResourceNode nodeFromResourceFile: kBallsFileName];
+	
+	// Beachball with no texture, but with several subnodes
+	mn = (CC3MeshNode*)[rezNode getNodeNamed: kBeachBallName];
+	[mn remove];		// Remove from the POD resource
+	mn.isOpaque = YES;
+	mn.isTouchEnabled = YES;
+	[templateNodes addObject: mn];
+    
+	// Make a simple box template available. Only 6 faces per node.
+	mn = [CC3BoxNode nodeWithName: kBoxName];
+	CC3BoundingBox bBox;
+	bBox.minimum = cc3v(-1.0, -1.0, -1.0);
+	bBox.maximum = cc3v( 1.0,  1.0,  1.0);
+	[mn populateAsSolidBox: bBox];
+	mn.material = [CC3Material material];
+	mn.isTouchEnabled = YES;
+	//mn.shouldColorTile = YES;
+	[templateNodes addObject: mn];
+	
+    //	// Mascot model from POD resource.
+    //	rezNode = [CC3PODResourceNode nodeFromResourceFile: kMascotPODFile];
+    //	mn = (CC3MeshNode*)[rezNode getNodeNamed: kMascotName];
+    //	[mn remove];		// Remove from the POD resource
+    //	[mn movePivotToCenterOfGeometry];
+    //	mn.rotation = cc3v(0.0, -90.0, 0.0);
+    //	mn.isTouchEnabled = YES;
+    //	[templates addObject: mn];
+	
+	// Die cube model from POD resource.
+	rezNode = [CC3PODResourceNode nodeFromResourceFile: kDieCubePODFile];
+	mn = (CC3MeshNode*)[rezNode getNodeNamed: kDieCubeName];
+	[mn remove];		// Remove from the POD resource
+	mn.isTouchEnabled = YES;
+	[templateNodes addObject: mn];
+	
+    NSLog(@"DONE");
+    NSLog(@"%d", [templateNodes count]);
+}
 /**
  * Constructs the 3D world.
  *
@@ -35,7 +98,10 @@
  * from the Resources folder of your project!!
  */
 -(void) initializeWorld {
-
+    
+    nodeCount = 0;
+    
+    [self initializeTemplates];
 	// Create the camera, place it back a bit, and add it to the world
 	CC3Camera* cam = [CC3Camera nodeWithName: @"Camera"];
 	cam.location = cc3v( 0.0, 0.0, 6.0 );
@@ -50,13 +116,17 @@
 
 	// This is the simplest way to load a POD resource file and add the
 	// nodes to the CC3World, if no customized resource subclass is needed.
-	[self addContentFromPODResourceFile: @"hello-world.pod"];
+    
+//	[self addContentFromPODResourceFile: @"DieCube.pod"] ;
 	
+    self.drawingSequencer = [CC3NodeArraySequencer sequencerWithEvaluator: [CC3LocalContentNodeAcceptor evaluator]];
+	self.drawingSequencer.allowSequenceUpdates = NO;
+    
 	// Create OpenGL ES buffers for the vertex arrays to keep things fast and efficient,
 	// and to save memory, release the vertex data in main memory because it is now redundant.
 	[self createGLBuffers];
 	[self releaseRedundantData];
-	
+    
 	// That's it! The model world is now constructed and is good to go.
 	
 	// If you encounter problems displaying your models, you can uncomment one or
@@ -88,26 +158,26 @@
 	
 	// Fetch the 'hello, world' 3D text object that was loaded from the
 	// POD file and start it rotating
-	CC3MeshNode* helloTxt = (CC3MeshNode*)[self getNodeNamed: @"Hello"];
-	CCActionInterval* partialRot = [CC3RotateBy actionWithDuration: 1.0
-														  rotateBy: cc3v(0.0, 30.0, 0.0)];
-	[helloTxt runAction: [CCRepeatForever actionWithAction: partialRot]];
-	
-	// To make things a bit more appealing, set up a repeating up/down cycle to
-	// change the color of the text from the original red to blue, and back again.
-	GLfloat tintTime = 8.0f;
-	ccColor3B startColor = helloTxt.color;
-	ccColor3B endColor = { 50, 0, 200 };
-	CCActionInterval* tintDown = [CCTintTo actionWithDuration: tintTime
-														  red: endColor.r
-														green: endColor.g
-														 blue: endColor.b];
-	CCActionInterval* tintUp = [CCTintTo actionWithDuration: tintTime
-														red: startColor.r
-													  green: startColor.g
-													   blue: startColor.b];
-	 CCActionInterval* tintCycle = [CCSequence actionOne: tintDown two: tintUp];
-	[helloTxt runAction: [CCRepeatForever actionWithAction: tintCycle]];
+//	CC3MeshNode* helloTxt = (CC3MeshNode*)[self getNodeNamed: @"Cube"];
+//	CCActionInterval* partialRot = [CC3RotateBy actionWithDuration: 1.0
+//														  rotateBy: cc3v(0.0, 30.0, 0.0)];
+//	[helloTxt runAction: [CCRepeatForever actionWithAction: partialRot]];
+//	
+//	// To make things a bit more appealing, set up a repeating up/down cycle to
+//	// change the color of the text from the original red to blue, and back again.
+//	GLfloat tintTime = 8.0f;
+//	ccColor3B startColor = helloTxt.color;
+//	ccColor3B endColor = { 50, 0, 200 };
+//	CCActionInterval* tintDown = [CCTintTo actionWithDuration: tintTime
+//														  red: endColor.r
+//														green: endColor.g
+//														 blue: endColor.b];
+//	CCActionInterval* tintUp = [CCTintTo actionWithDuration: tintTime
+//														red: startColor.r
+//													  green: startColor.g
+//													   blue: startColor.b];
+//	 CCActionInterval* tintCycle = [CCSequence actionOne: tintDown two: tintUp];
+//	[helloTxt runAction: [CCRepeatForever actionWithAction: tintCycle]];
 }
 
 
@@ -145,6 +215,7 @@
  * This method is invoked automatically at each scheduled update. Usually, the application
  * never needs to invoke this method directly.
  */
+
 -(void) updateBeforeTransform: (CC3NodeUpdatingVisitor*) visitor {}
 
 /**
@@ -184,6 +255,64 @@
  * never needs to invoke this method directly.
  */
 -(void) updateAfterTransform: (CC3NodeUpdatingVisitor*) visitor {}
+
+
+-(void)setSelectedObject:(uint) idx{
+    
+    if (idx == 0)
+        currentNodeName = kBeachBallName;
+    else if (idx == 1)
+        currentNodeName = kBoxName;
+    else
+        currentNodeName = kDieCubeName;
+    
+    currentNodeIdx = idx;
+    
+    currentNode = (CC3Node*)[templateNodes objectAtIndex:currentNodeIdx];
+    CC3Node *aNode = [currentNode copyAutoreleased];
+    
+    aNode.location = kCC3VectorZero;
+    aNode.uniformScale *= 1.0;
+    
+    [self addChild:aNode];
+    nodeCount = 1;
+}
+
+
+-(void)increaseNodeByOne{
+    
+    
+//    [self removeAllChildren];
+    GLfloat sideLength = 100.0f;
+    GLfloat spacing = sideLength / (nodeCount);
+    GLfloat xOrg = -sideLength / 2.0f;
+    GLfloat zOrg = -sideLength / 2.0f;
+    
+    // Scale the node down as the number grows larger, using 3 nodes per side as the standard scale
+    //GLfloat scaleFactor = 5.0f / (nodeCount * 2 - 1);
+    
+    // Replace all the nodes again for the number of nodes currently at
+    for (int i = 0; i < nodeCount; ++i){
+        GLfloat xLoc = (xOrg + spacing * i)/100;
+        GLfloat zLoc = (zOrg + spacing * i)/100;
+        
+        NSLog(@"%f, %f", xLoc, zLoc);
+        
+        CC3Node* aNode = [currentNode copyAutoreleased];
+        
+        //the range for placing a node on the cc3v is roughly (+- 2.5, +- 3.3, Z)
+        aNode.location = cc3v(0.0f, 0.0f, 0.0f);
+        //aNode.uniformScale *= (1/nodeCount) + nodeCount/2;
+        
+        [self addChild:aNode];
+    }
+
+    [self createGLBuffers];			// Copy vertex data to OpenGL VBO's.
+	[self releaseRedundantData];	// Release vertex data from main memory.
+   
+    nodeCount += 1;
+    NSLog(@"%d",  [[self children] count]);
+}
 
 @end
 

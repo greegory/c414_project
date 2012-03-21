@@ -11,6 +11,7 @@
 #import "Cmput3DAppDelegate.h"
 #import "Cmput3DLayer.h"
 #import "Cmput3DWorld.h"
+#import "Cmput3DMenuLayer.h"
 #import "CC3EAGLView.h"
 
 @implementation Cmput3DAppDelegate
@@ -40,7 +41,7 @@
 	[director setDeviceOrientation:kCCDeviceOrientationPortrait];
 
 	[director setAnimationInterval:1.0/60];
-	[director setDisplayFPS:YES];
+	[director setDisplayFPS:NO];
 	
 	// Alloc & init the EAGLView
 	//  1. Transparency (alpha blending), and device camera overlay requires an alpha channel,
@@ -68,8 +69,8 @@
 	[director setOpenGLView:glView];
 						
 	// Enables High Res mode (Retina Display) on iPhone 4 and maintains low res on all other devices
-//	if( ! [director enableRetinaDisplay:YES] )
-//		CCLOG(@"Retina Display Not supported");
+	if( ! [director enableRetinaDisplay:YES] )
+		CCLOG(@"Retina Display Not supported");
 						
 	
 	// make the GL view a child of the main window and present it
@@ -86,13 +87,13 @@
 	
 	// Create the customized CC3Layer that supports 3D rendering,
 	// and schedule it for automatic updates
-	CC3Layer* cc3Layer = [Cmput3DLayer node];
-	[cc3Layer scheduleUpdate];
-	
-	// Create the customized 3D world, attach it to the layer, and start it playing.
-	cc3Layer.cc3World = [Cmput3DWorld world];
-
-	ControllableCCLayer* mainLayer = cc3Layer;
+//	CC3Layer* cc3Layer = [Cmput3DLayer node];
+//	[cc3Layer scheduleUpdate];
+//	
+//	// Create the customized 3D world, attach it to the layer, and start it playing.
+//	cc3Layer.cc3World = [Cmput3DWorld world];
+//
+//	ControllableCCLayer* mainLayer = cc3Layer;
 	
 	// The 3D layer can run either direcly in the scene, or it can run as a smaller "sub-window"
 	// within any standard CCLayer. So you can have a mostly 2D window, with a smaller 3D window
@@ -115,15 +116,15 @@
 	// changes, or if you want to display a device camera behind a combined 3D & 2D scene
 	// (augmented reality), use a controller. Otherwise you can simply remove the following lines
 	// and uncomment the lines below these lines that uses the traditional CCDirector scene startup.
-	viewController = [[CCNodeController controller] retain];
-	viewController.doesAutoRotate = YES;
-	[viewController runSceneOnNode: mainLayer];		// attach the layer to the controller and run a scene with it
+//	viewController = [[CCNodeController controller] retain];
+//	viewController.doesAutoRotate = YES;
+//	[viewController runSceneOnNode: mainLayer];		// attach the layer to the controller and run a scene with it
 	
 	// If a controller is NOT used, uncomment the following standard CCDirector scene startup lines,
 	// and remove the lines above that reference viewContoller.
-//	CCScene *scene = [CCScene node];
-//	[scene addChild: mainLayer];
-//	[[CCDirector sharedDirector] runWithScene: scene];
+	CCScene *scene = [CCScene node];
+	[scene addChild: [Cmput3DMenuLayer scene]];
+	[[CCDirector sharedDirector] runWithScene: scene];
 	
 }
 
