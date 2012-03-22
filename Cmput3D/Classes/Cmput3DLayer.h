@@ -12,6 +12,12 @@
 /** A sample application-specific CC3Layer subclass. */
 @interface Cmput3DLayer : CC3Layer {
 
+    CCMenuItem *backButton;
+    CCMenuItem *plusButton;
+    CCMenuItem *lowButton;
+    CCMenuItem *medButton;
+    CCMenuItem *highButton;
+    
 }
 
 @end

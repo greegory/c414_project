@@ -9,7 +9,6 @@
 #import "Cmput3DLayer.h"
 #import "Cmput3DWorld.h"
 #import "Cmput3DMenuLayer.h"
-#import "CCTouchDispatcher.h"
 #import "CC3World.h"
 #import "CC3PerformanceStatistics.h"
 
@@ -17,6 +16,7 @@
 @interface Cmput3DLayer (TemplateMethods)
 -(void)addBackButton;
 -(void)addPlusMinusButton;
+-(void)addSlider;
 -(void)initializeControls;
 
 @property (nonatomic, readonly) Cmput3DWorld* cmputWorld;
@@ -24,6 +24,11 @@
 
 @implementation Cmput3DLayer
 - (void)dealloc {
+    backButton = nil;
+    plusButton = nil;
+    lowButton = nil;
+    medButton = nil;
+    highButton = nil;
     [super dealloc];
 }
 
@@ -38,12 +43,12 @@
 
 -(void)addBackButton{
     
-    CCMenuItem *menuItem1 = [CCMenuItemImage itemFromNormalImage:@"back_Label.png" 
-                                                   selectedImage:@"back_Label_selected.png" 
-                                                          target:self
-                                                        selector:@selector(backToMenu:)];
+    backButton = [CCMenuItemImage itemFromNormalImage:@"back_Label.png" 
+                                        selectedImage:@"back_Label_selected.png" 
+                                               target:self
+                                            selector:@selector(backToMenu:)];
     
-    CCMenu *back = [CCMenu menuWithItems:menuItem1, nil];
+    CCMenu *back = [CCMenu menuWithItems:backButton, nil];
     [back setPosition:CGPointMake(40, 460)];
     
     [self addChild:back];
@@ -51,15 +56,44 @@
 
 -(void)addPlusMinusButton{
     
-    CCMenuItem *menuItem2 = [CCMenuItemImage itemFromNormalImage:@"ZoomButton48x48.png" 
-                                                   selectedImage:@"ZoomButton48x48.png" 
-                                                          target:self
-                                                        selector:@selector(increaseNodes:)];
+    plusButton = [CCMenuItemImage itemFromNormalImage:@"ZoomButton48x48.png" 
+                                        selectedImage:@"ZoomButton48x48.png" 
+                                               target:self
+                                             selector:@selector(increaseNodes:)];
     
-    CCMenu *plus = [CCMenu menuWithItems:menuItem2, nil];
+    CCMenu *plus = [CCMenu menuWithItems:plusButton, nil];
     [plus setPosition:CGPointMake(300, 460)];
     
     [self addChild:plus];
+}
+
+-(void)addSlider {
+    lowButton = [CCMenuItemImage itemFromNormalImage:@"Icon-Small.png" 
+                                       selectedImage:@"Icon-Small-50.png" 
+                                              target:self 
+                                            selector:@selector(slideLow:)];
+    
+    
+    medButton = [CCMenuItemImage itemFromNormalImage:@"Icon-Small.png"
+                                       selectedImage:@"Icon-Small-50.png"
+                                              target:self 
+                                            selector:@selector(slideMed:)];
+    
+    highButton = [CCMenuItemImage itemFromNormalImage:@"Icon-Small.png"
+                                        selectedImage:@"Icon-Small-50.png"
+                                               target:self 
+                                             selector:@selector(slideHigh:)];
+    
+    CCMenu *slide = [CCMenu menuWithItems: nil];
+    [slide addChild:lowButton z:0 tag:11];
+    [slide addChild:medButton z:0 tag:22];
+    [slide addChild:highButton z:0 tag:33];
+    
+    [slide setPosition:CGPointMake(160, 20)];
+    [slide alignItemsHorizontallyWithPadding:100];
+    
+    [self addChild:slide];
+    
 }
 /**
  * Template method that is invoked automatically during initialization, regardless
@@ -74,6 +108,7 @@
 
     [self addBackButton];   
     [self addPlusMinusButton];
+    [self addSlider];
     self.isTouchEnabled = YES;
 }
 
@@ -92,7 +127,19 @@
 
 -(void)increaseNodes: (CCMenuItem*) menuItem{
     NSLog(@"Add Node");
-    [self.cmputWorld increaseNodeByOne];
+   [self.cmputWorld increaseNodeByOne: CGPointMake(0.0, 0.0)];
+}
+
+-(void)slideLow: (CCMenuItem*) menuItem {
+    NSLog(@"LOW");
+}
+
+-(void)slideMed: (CCMenuItem*) menuItem {
+    NSLog(@"MEDIUM");
+}
+
+-(void)slideHigh: (CCMenuItem*) menuItem {
+    NSLog(@"HIGH");
 }
 
 -(BOOL) ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
@@ -102,7 +149,8 @@
 -(void) ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event{
     CGPoint location = [self convertTouchToNodeSpace:touch];
     
-    NSLog(@"%f, %f",location.x, location.y);
+    [self.cmputWorld increaseNodeByOne: location];
+   // NSLog(@"%f, %f",location.x, location.y);
         
 }
  // The ccTouchMoved:withEvent: method is optional for the <CCTouchDelegateProtocol>.

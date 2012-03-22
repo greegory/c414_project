@@ -25,6 +25,12 @@
 @synthesize templateNodes;
 
 -(void) dealloc {
+    camera = nil;
+    lamp = nil;
+    currentNode = nil;
+    camTarget = nil;
+    origCamTarget = nil;
+    [templateNodes release];
 	[super dealloc];
 }
 
@@ -102,18 +108,9 @@
     nodeCount = 0;
     
     [self initializeTemplates];
-	// Create the camera, place it back a bit, and add it to the world
-	CC3Camera* cam = [CC3Camera nodeWithName: @"Camera"];
-	cam.location = cc3v( 0.0, 0.0, 6.0 );
-	[self addChild: cam];
-
-	// Create a light, place it back and to the left at a specific
-	// position (not just directional lighting), and add it to the world
-	CC3Light* lamp = [CC3Light nodeWithName: @"Lamp"];
-	lamp.location = cc3v( -2.0, 0.0, 0.0 );
-	lamp.isDirectionalOnly = NO;
-	[cam addChild: lamp];
-
+    
+    [self addCamera];
+	
 	// This is the simplest way to load a POD resource file and add the
 	// nodes to the CC3World, if no customized resource subclass is needed.
     
@@ -180,7 +177,36 @@
 //	[helloTxt runAction: [CCRepeatForever actionWithAction: tintCycle]];
 }
 
+-(void) addCamera{
 
+    // Camera starts out embedded in the world.
+	cameraZoomType = kCameraZoomNone;
+	
+	// The camera comes from the POD file and is actually animated.
+	// Stop the camera from being animated so the user can control it via the user interface.
+	[self.activeCamera disableAnimation];
+	
+	// Keep track of which object the camera is pointing at
+	origCamTarget = self.activeCamera.target;
+	camTarget = origCamTarget;
+    
+	// For cameras, the scale property determines camera zooming, and the effective
+	// field-of-view. You can adjust this value to play with camera zooming.
+	// Conversely, if you find that objects in the periphery of your view appear elongated,
+	// you can adjust the fieldOfView and/or uniformScale properties to reduce this
+	// "fish-eye" effect. See the notes of the CC3Camera fieldOfView property for more on this.
+	self.activeCamera.uniformScale = 1;
+	
+    
+    // Create a light, place it back and to the left at a specific
+	// position (not just directional lighting), and add it to the world
+	lamp = [CC3Light nodeWithName: @"Lamp"];
+	lamp.location = cc3v( 160, 260, 120.0 );
+	lamp.isDirectionalOnly = NO;
+    lamp.uniformScale *= 100;
+	[self addChild: lamp];
+
+}
 /**
  * This template method is invoked periodically whenever the 3D nodes are to be updated.
  *
@@ -271,8 +297,8 @@
     currentNode = (CC3Node*)[templateNodes objectAtIndex:currentNodeIdx];
     CC3Node *aNode = [currentNode copyAutoreleased];
     
-    aNode.location = kCC3VectorZero;
-    aNode.uniformScale *= 1.0;
+    aNode.location = cc3v(154,250,0.0);
+    aNode.uniformScale *= 40;
     
     CCActionInterval* partialRot = [CC3RotateBy actionWithDuration: 1.0
                                                           rotateBy: cc3v(0.0, 30.0, 0.0)];
@@ -283,32 +309,18 @@
 }
 
 
--(void)increaseNodeByOne{
+-(void)increaseNodeByOne: (CGPoint) loc{
     
     nodeCount += 1;
+    NSLog(@"%f, %f", loc.x, loc.y);
     
-    GLfloat xloc = (arc4random() % 25);
-    GLfloat yloc = (arc4random() % 35);
-    GLfloat zloc = (arc4random() % 60);
-    
-    xloc /= 10;
-    yloc /= 10;
-    zloc /= 10;
-    
-    int xR = arc4random() % 100, 
-        yR = arc4random() % 100, 
-        zR = arc4random() % 100;
-    
-    if (xR % 2 == 0)
-        xloc *= -1;
-    if (yR % 2 == 0)
-        yloc *= -1;
-    if (zR > 1)
-        zloc *= -1;
+    if (loc.x == 0){
+        loc = CGPointMake(arc4random()%320, arc4random()%480);
+    }
     
     CC3Node *aNode = [currentNode copyAutoreleased];
-    aNode.location = cc3v(xloc, yloc, zloc);
-    aNode.uniformScale *= 1;
+    aNode.location = cc3v(loc.x, loc.y, 0.0);
+    aNode.uniformScale *= 40;
     
     CCActionInterval* partialRot = [CC3RotateBy actionWithDuration: 1.0
     														  rotateBy: cc3v(0.0, 30.0, 0.0)];
@@ -316,7 +328,7 @@
     
     [self addChild:aNode];
     
-    NSLog(@"%f, %f, %f", xloc, yloc, zloc);
+   // NSLog(@"%f, %f, %f", xloc, yloc, zloc);
 
     [self createGLBuffers];			// Copy vertex data to OpenGL VBO's.
 	[self releaseRedundantData];	// Release vertex data from main memory.

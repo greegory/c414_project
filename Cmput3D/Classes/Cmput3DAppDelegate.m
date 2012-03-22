@@ -41,7 +41,7 @@
 	[director setDeviceOrientation:kCCDeviceOrientationPortrait];
 
 	[director setAnimationInterval:1.0/60];
-	[director setDisplayFPS:NO];
+	[director setDisplayFPS:YES];
 	
 	// Alloc & init the EAGLView
 	//  1. Transparency (alpha blending), and device camera overlay requires an alpha channel,
