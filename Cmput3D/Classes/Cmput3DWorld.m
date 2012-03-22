@@ -142,7 +142,7 @@
 	
 	// Displays bounding boxes around all nodes. The bounding box for each node
 	// will encompass its child nodes.
-//	self.shouldDrawAllWireframeBoxes = YES;
+	self.shouldDrawAllWireframeBoxes = YES;
 	
 	// Moves the camera so that it will display the entire scene.
 //	[self.activeCamera moveWithDuration: 3.0 toShowAllOf: self];
@@ -274,6 +274,10 @@
     aNode.location = kCC3VectorZero;
     aNode.uniformScale *= 1.0;
     
+    CCActionInterval* partialRot = [CC3RotateBy actionWithDuration: 1.0
+                                                          rotateBy: cc3v(0.0, 30.0, 0.0)];
+    [aNode runAction: [CCRepeatForever actionWithAction: partialRot]];
+    
     [self addChild:aNode];
     nodeCount = 1;
 }
@@ -281,36 +285,42 @@
 
 -(void)increaseNodeByOne{
     
+    nodeCount += 1;
     
-//    [self removeAllChildren];
-    GLfloat sideLength = 100.0f;
-    GLfloat spacing = sideLength / (nodeCount);
-    GLfloat xOrg = -sideLength / 2.0f;
-    GLfloat zOrg = -sideLength / 2.0f;
+    GLfloat xloc = (arc4random() % 25);
+    GLfloat yloc = (arc4random() % 35);
+    GLfloat zloc = (arc4random() % 60);
     
-    // Scale the node down as the number grows larger, using 3 nodes per side as the standard scale
-    //GLfloat scaleFactor = 5.0f / (nodeCount * 2 - 1);
+    xloc /= 10;
+    yloc /= 10;
+    zloc /= 10;
     
-    // Replace all the nodes again for the number of nodes currently at
-    for (int i = 0; i < nodeCount; ++i){
-        GLfloat xLoc = (xOrg + spacing * i)/100;
-        GLfloat zLoc = (zOrg + spacing * i)/100;
-        
-        NSLog(@"%f, %f", xLoc, zLoc);
-        
-        CC3Node* aNode = [currentNode copyAutoreleased];
-        
-        //the range for placing a node on the cc3v is roughly (+- 2.5, +- 3.3, Z)
-        aNode.location = cc3v(0.0f, 0.0f, 0.0f);
-        //aNode.uniformScale *= (1/nodeCount) + nodeCount/2;
-        
-        [self addChild:aNode];
-    }
+    int xR = arc4random() % 100, 
+        yR = arc4random() % 100, 
+        zR = arc4random() % 100;
+    
+    if (xR % 2 == 0)
+        xloc *= -1;
+    if (yR % 2 == 0)
+        yloc *= -1;
+    if (zR > 1)
+        zloc *= -1;
+    
+    CC3Node *aNode = [currentNode copyAutoreleased];
+    aNode.location = cc3v(xloc, yloc, zloc);
+    aNode.uniformScale *= 1;
+    
+    CCActionInterval* partialRot = [CC3RotateBy actionWithDuration: 1.0
+    														  rotateBy: cc3v(0.0, 30.0, 0.0)];
+    [aNode runAction: [CCRepeatForever actionWithAction: partialRot]];
+    
+    [self addChild:aNode];
+    
+    NSLog(@"%f, %f, %f", xloc, yloc, zloc);
 
     [self createGLBuffers];			// Copy vertex data to OpenGL VBO's.
 	[self releaseRedundantData];	// Release vertex data from main memory.
    
-    nodeCount += 1;
     NSLog(@"%d",  [[self children] count]);
 }
 
