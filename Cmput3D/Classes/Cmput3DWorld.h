@@ -30,6 +30,7 @@ typedef enum {
     CC3Node* origCamTarget;
 	CC3Node* camTarget;
     CameraZoomType cameraZoomType;
+    CC3Node *selectedNode;
 }
 
 @property (nonatomic, retain) NSMutableArray *templateNodes;

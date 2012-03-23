@@ -68,21 +68,35 @@
 }
 
 -(void)addSlider {
-    lowButton = [CCMenuItemImage itemFromNormalImage:@"Icon-Small.png" 
-                                       selectedImage:@"Icon-Small-50.png" 
-                                              target:self 
-                                            selector:@selector(slideLow:)];
+    lowButton = [CCMenuItemFont itemFromString:@"low"
+                                        target:self 
+                                      selector:@selector(slideLow:)];
     
     
-    medButton = [CCMenuItemImage itemFromNormalImage:@"Icon-Small.png"
-                                       selectedImage:@"Icon-Small-50.png"
-                                              target:self 
-                                            selector:@selector(slideMed:)];
+    medButton = [CCMenuItemFont itemFromString:@"medium"
+                                        target:self
+                                      selector:@selector(slideMed:)];
     
-    highButton = [CCMenuItemImage itemFromNormalImage:@"Icon-Small.png"
-                                        selectedImage:@"Icon-Small-50.png"
-                                               target:self 
-                                             selector:@selector(slideHigh:)];
+    highButton = [CCMenuItemFont itemFromString:@"high"
+                                         target:self
+                                       selector:@selector(slideHigh:)];
+    
+//    lowButton = [CCMenuItemImage itemFromNormalImage:@"Icon-Small.png" 
+//                                       selectedImage:@"Icon-Small-50.png" 
+//                                              target:self 
+//                                            selector:@selector(slideLow:)];
+//    
+//    
+//    medButton = [CCMenuItemImage itemFromNormalImage:@"Icon-Small.png"
+//                                       selectedImage:@"Icon-Small-50.png"
+//                                              target:self 
+//                                            selector:@selector(slideMed:)];
+//    
+//    highButton = [CCMenuItemImage itemFromNormalImage:@"Icon-Small.png"
+//                                        selectedImage:@"Icon-Small-50.png"
+//                                               target:self 
+//                                             selector:@selector(slideHigh:)];
+//    
     
     CCMenu *slide = [CCMenu menuWithItems: nil];
     [slide addChild:lowButton z:0 tag:11];
@@ -90,7 +104,7 @@
     [slide addChild:highButton z:0 tag:33];
     
     [slide setPosition:CGPointMake(160, 20)];
-    [slide alignItemsHorizontallyWithPadding:100];
+    [slide alignItemsHorizontallyWithPadding:50];
     
     [self addChild:slide];
     
@@ -113,16 +127,16 @@
 }
 
 
--(void)registerWithTouchDispatcher{
-    [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
-}
+//-(void)registerWithTouchDispatcher{
+//    [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
+//}
 
 -(void) backToMenu: (CCMenuItem*) menuItem {
     
     [[CCDirector sharedDirector] replaceScene:
         [CCTransitionFade transitionWithDuration:0.5f scene:[Cmput3DMenuLayer scene]]];
     
-    NSLog(@"the back button was seleceted");
+    NSLog(@"the back button was selected");
 }
 
 -(void)increaseNodes: (CCMenuItem*) menuItem{
@@ -130,29 +144,42 @@
    [self.cmputWorld increaseNodeByOne: CGPointMake(0.0, 0.0)];
 }
 
+/*
+ *Menu times for the simplification levels
+ */
 -(void)slideLow: (CCMenuItem*) menuItem {
+    
     NSLog(@"LOW");
 }
 
 -(void)slideMed: (CCMenuItem*) menuItem {
+    for (CC3Node* c in [self.cmputWorld children]){
+        if (![c isKindOfClass:[CC3Light class]])
+            c.location = cc3v(c.location.x, c.location.y, c.location.z-100);
+    }
     NSLog(@"MEDIUM");
 }
 
 -(void)slideHigh: (CCMenuItem*) menuItem {
+    for (CC3Node* c in [self.cmputWorld children]){
+        if (![c isKindOfClass:[CC3Light class]])
+            c.location = cc3v(c.location.x, c.location.y, c.location.z+100);
+    }
     NSLog(@"HIGH");
 }
 
--(BOOL) ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
-    return YES;
-}
+//-(BOOL) ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
+//    return YES;
+//}
+//
+//-(void) ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event{
+//    CGPoint location = [self convertTouchToNodeSpace:touch];
+//    
+//    [self.cmputWorld increaseNodeByOne: location];
+//   // NSLog(@"%f, %f",location.x, location.y);
+//        
+//}
 
--(void) ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event{
-    CGPoint location = [self convertTouchToNodeSpace:touch];
-    
-    [self.cmputWorld increaseNodeByOne: location];
-   // NSLog(@"%f, %f",location.x, location.y);
-        
-}
  // The ccTouchMoved:withEvent: method is optional for the <CCTouchDelegateProtocol>.
  // The event dispatcher will not dispatch events for which there is no method
  // implementation. Since the touch-move events are both voluminous and seldom used,

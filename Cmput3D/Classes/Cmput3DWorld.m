@@ -30,6 +30,7 @@
     currentNode = nil;
     camTarget = nil;
     origCamTarget = nil;
+    selectedNode = nil;
     [templateNodes release];
 	[super dealloc];
 }
@@ -106,7 +107,7 @@
 -(void) initializeWorld {
     
     nodeCount = 0;
-    
+    selectedNode = nil;
     [self initializeTemplates];
     
     [self addCamera];
@@ -299,28 +300,40 @@
     
     aNode.location = cc3v(154,250,0.0);
     aNode.uniformScale *= 40;
+    aNode.isTouchEnabled = YES;
+//    aNode.tag = 1;
     
     CCActionInterval* partialRot = [CC3RotateBy actionWithDuration: 1.0
                                                           rotateBy: cc3v(0.0, 30.0, 0.0)];
     [aNode runAction: [CCRepeatForever actionWithAction: partialRot]];
     
-    [self addChild:aNode];
     nodeCount = 1;
+    [self addChild:aNode];
 }
 
 
 -(void)increaseNodeByOne: (CGPoint) loc{
     
     nodeCount += 1;
-    NSLog(@"%f, %f", loc.x, loc.y);
     
+//    NSLog(@"%f, %f", loc.x, loc.y);
+    
+    //This makes a random place for when the PLUS button is used
     if (loc.x == 0){
         loc = CGPointMake(arc4random()%320, arc4random()%480);
     }
     
+    //Ensures that the objects to not overlap the menus
+    if (loc.y < 80)
+        loc.y = 80;
+    else if (loc.y > 400)
+        loc.y = 400;
+    
     CC3Node *aNode = [currentNode copyAutoreleased];
     aNode.location = cc3v(loc.x, loc.y, 0.0);
     aNode.uniformScale *= 40;
+    aNode.isTouchEnabled = YES;
+//    aNode.tag = nodeCount;
     
     CCActionInterval* partialRot = [CC3RotateBy actionWithDuration: 1.0
     														  rotateBy: cc3v(0.0, 30.0, 0.0)];
@@ -328,13 +341,52 @@
     
     [self addChild:aNode];
     
-   // NSLog(@"%f, %f, %f", xloc, yloc, zloc);
-
+    //loops through all children nodes of the world
+//    for (CC3Node* child in children) {
+//        if (![child isKindOfClass:[CC3Light class]]){
+//            // [self removeChild:child];
+//            NSLog(@"%d", [child tag]);
+//        }
+//    }
     [self createGLBuffers];			// Copy vertex data to OpenGL VBO's.
 	[self releaseRedundantData];	// Release vertex data from main memory.
    
-    NSLog(@"%d",  [[self children] count]);
+    //NSLog(@"%d",  [[self children] count]);
 }
 
+-(void) touchEvent: (uint) touchType at: (CGPoint) touchPoint {
+    
+	switch (touchType) {
+		case kCCTouchBegan:
+			[touchedNodePicker pickNodeFromTouchEvent: touchType at: touchPoint];
+            break;
+        case kCCTouchMoved:
+            break;
+        case kCCTouchEnded:
+            if (selectedNode == nil)
+                [self increaseNodeByOne:touchPoint];
+            selectedNode = nil;
+            break;
+		default:
+			break;
+	}
+	
+}
+-(void) nodeSelected: (CC3Node*) aNode byTouchEvent: (uint) touchType at: (CGPoint) touchPoint {
+	LogInfo(@"You selected %@ at %@, or %@ in 2D.", aNode,
+			NSStringFromCC3Vector(aNode ? aNode.globalLocation : kCC3VectorZero),
+			NSStringFromCC3Vector(aNode ? [activeCamera projectNode: aNode] : kCC3VectorZero));
+    
+	// Remember the node that was selected
+	selectedNode = aNode;
+    
+    for (CC3Node* child in children) {
+        if (aNode == child)
+            [self removeChild:child];
+    }
+	// Toggle the display of a descriptor label on the node
+	aNode.shouldDrawDescriptor = !aNode.shouldDrawDescriptor;
+	
+}
 @end
 
