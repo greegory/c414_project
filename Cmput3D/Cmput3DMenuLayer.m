@@ -3,31 +3,17 @@
 //  Cmput3D
 //
 //  Created by Greg Jaciuk on 12-03-17.
-//  Copyright 2012 __MyCompanyName__. All rights reserved.
+//  Copyright 2012 Greg Jaciuk . All rights reserved.
 //
 
 #import "Cmput3DMenuLayer.h"
-#import "Cmput3DLayer.h"
-#import "Cmput3DWorld.h"
-#import "CCTouchDispatcher.h"
-#import "ccTypes.h"
-
-#import "Cmput3DLayer.h"
-#import "Cmput3DWorld.h"
-#import "Cmput3DMenuLayer.h"
-#import "CCTouchDispatcher.h"
-#import "CC3World.h"
-
-#import "CC3ActionInterval.h"
-#import "CC3MeshNode.h"
-#import "CC3PODResourceNode.h"
-#import "CC3ParametricMeshNodes.h"
-
 
 @interface Cmput3DMenuLayer (TemplateMethods)
+
 -(void)initializeControls;
 
 @end
+
 @implementation Cmput3DMenuLayer
 
 +(CCScene *) scene
@@ -109,6 +95,7 @@
 -(void) worldWith: (NSString*) kname{
     
     int idx = 0;
+    
     if (kname == kDieCubeName)
         idx = 2;
     else if (kname == kBoxName)
@@ -130,7 +117,8 @@
 	[scene addChild: mainLayer];
     
 	[[CCDirector sharedDirector] replaceScene: 
-        [CCTransitionFade transitionWithDuration:0.5f scene: scene]];
+        [CCTransitionFade transitionWithDuration:0.5f scene: scene] ];
+    
 }
 
 

@@ -3,15 +3,12 @@
 //  Cmput3D
 //
 //  Created by Greg Jaciuk on 12-03-17.
-//  Copyright __MyCompanyName__ 2012. All rights reserved.
+//  Copyright Greg Jaciuk  2012. All rights reserved.
 //
 
 #import "Cmput3DLayer.h"
 #import "Cmput3DWorld.h"
 #import "Cmput3DMenuLayer.h"
-#import "CC3World.h"
-#import "CC3PerformanceStatistics.h"
-
 
 @interface Cmput3DLayer (TemplateMethods)
 -(void)addBackButton;
@@ -23,13 +20,22 @@
 @end
 
 @implementation Cmput3DLayer
-- (void)dealloc {
+- (void)dealloc {    
     backButton = nil;
     plusButton = nil;
     lowButton = nil;
     medButton = nil;
     highButton = nil;
+    
     [super dealloc];
+}
+
+-(void) initializeControls {
+    
+    [self addBackButton];   
+    // [self addPlusMinusButton];
+    //[self addSlider];
+    self.isTouchEnabled = YES;
 }
 
 /**
@@ -42,6 +48,7 @@
 }
 
 -(void)addBackButton{
+    CGSize window = (CGSize)[[CCDirector sharedDirector] winSize];
     
     backButton = [CCMenuItemImage itemFromNormalImage:@"back_Label.png" 
                                         selectedImage:@"back_Label_selected.png" 
@@ -49,12 +56,13 @@
                                             selector:@selector(backToMenu:)];
     
     CCMenu *back = [CCMenu menuWithItems:backButton, nil];
-    [back setPosition:CGPointMake(40, 460)];
+    [back setPosition:CGPointMake(window.width-440, window.height-20)];
     
     [self addChild:back];
 }
 
 -(void)addPlusMinusButton{
+    CGSize window = (CGSize)[[CCDirector sharedDirector] winSize];
     
     plusButton = [CCMenuItemImage itemFromNormalImage:@"ZoomButton48x48.png" 
                                         selectedImage:@"ZoomButton48x48.png" 
@@ -62,12 +70,14 @@
                                              selector:@selector(increaseNodes:)];
     
     CCMenu *plus = [CCMenu menuWithItems:plusButton, nil];
-    [plus setPosition:CGPointMake(300, 460)];
+    [plus setPosition:CGPointMake(window.width-20, window.height-20)];
     
     [self addChild:plus];
 }
 
 -(void)addSlider {
+    CGSize window = (CGSize)[[CCDirector sharedDirector] winSize];
+    
     lowButton = [CCMenuItemFont itemFromString:@"low"
                                         target:self 
                                       selector:@selector(slideLow:)];
@@ -103,33 +113,12 @@
     [slide addChild:medButton z:0 tag:22];
     [slide addChild:highButton z:0 tag:33];
     
-    [slide setPosition:CGPointMake(160, 20)];
+    [slide setPosition:CGPointMake(window.width/2, 20)];
     [slide alignItemsHorizontallyWithPadding:50];
     
     [self addChild:slide];
     
 }
-/**
- * Template method that is invoked automatically during initialization, regardless
- * of the actual init* method that was invoked. Subclasses can override to set up their
- * 2D controls and other initial state without having to override all of the possible
- * superclass init methods.
- *
- * The default implementation does nothing. It is not necessary to invoke the
- * superclass implementation when overriding in a subclass.
- */
--(void) initializeControls {
-
-    [self addBackButton];   
-    [self addPlusMinusButton];
-    [self addSlider];
-    self.isTouchEnabled = YES;
-}
-
-
-//-(void)registerWithTouchDispatcher{
-//    [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
-//}
 
 -(void) backToMenu: (CCMenuItem*) menuItem {
     
@@ -141,13 +130,16 @@
 
 -(void)increaseNodes: (CCMenuItem*) menuItem{
     NSLog(@"Add Node");
-   [self.cmputWorld increaseNodeByOne: CGPointMake(0.0, 0.0)];
+   //[self.cmputWorld increaseNodeByOne: CGPointMake(0.0, 0.0)];
 }
 
 /*
  *Menu times for the simplification levels
  */
 -(void)slideLow: (CCMenuItem*) menuItem {
+    
+    CGSize window = (CGSize)[[CCDirector sharedDirector] winSize];
+    NSLog(@"%f, %f", window.width, window.height);
     
     NSLog(@"LOW");
 }

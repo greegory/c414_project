@@ -3,7 +3,7 @@
 //  Cmput3D
 //
 //  Created by Greg Jaciuk on 12-03-17.
-//  Copyright __MyCompanyName__ 2012. All rights reserved.
+//  Copyright Greg Jaciuk 2012. All rights reserved.
 //
 
 #import "cocos2d.h"
@@ -87,44 +87,31 @@
 	
 	// Create the customized CC3Layer that supports 3D rendering,
 	// and schedule it for automatic updates
-//	CC3Layer* cc3Layer = [Cmput3DLayer node];
-//	[cc3Layer scheduleUpdate];
-//	
+	CC3Layer* cc3Layer = [Cmput3DMenuLayer node];
+	[cc3Layer scheduleUpdate];
+	
 //	// Create the customized 3D world, attach it to the layer, and start it playing.
 //	cc3Layer.cc3World = [Cmput3DWorld world];
-//
-//	ControllableCCLayer* mainLayer = cc3Layer;
-	
-	// The 3D layer can run either direcly in the scene, or it can run as a smaller "sub-window"
-	// within any standard CCLayer. So you can have a mostly 2D window, with a smaller 3D window
-	// embedded in it. To experiment with this smaller embedded 3D window, uncomment the following lines:
-//	CGSize winSize = [[CCDirector sharedDirector] winSize];
-//	cc3Layer.position = CGPointMake(30.0, 40.0);
-//	cc3Layer.contentSize = CGSizeMake(winSize.width - 70.0, winSize.width - 40.0);
-//	cc3Layer.alignContentSizeWithDeviceOrientation = YES;
-//	mainLayer = [ControllableCCLayer layerWithColor: ccc4(0, 0, 0, 255)];
-//	[mainLayer addChild: cc3Layer];
-	
-	// When it is smaller, you can even move the 3D layer around on the screen dyanmically.
-	// To see this in action, uncomment the lines above as described, and also uncomment
-	// the following two lines. The shouldAlwaysUpdateViewport property ensures that the
-	// 3D world tracks the updated position of the 3D layer within its parent layer.
-//	cc3Layer.shouldAlwaysUpdateViewport = YES;
-//	[cc3Layer runAction: [CCMoveTo actionWithDuration: 10.0 position: ccp(100.0, 200.0)]];
+
+	ControllableCCLayer* mainLayer = cc3Layer;
+
+	cc3Layer.shouldAlwaysUpdateViewport = YES;
+	//[cc3Layer runAction: [CCMoveTo actionWithDuration: 10.0 position: ccp(100.0, 200.0)]];
 	
 	// The controller is optional. If you want to auto-rotate the view when the device orientation
 	// changes, or if you want to display a device camera behind a combined 3D & 2D scene
 	// (augmented reality), use a controller. Otherwise you can simply remove the following lines
 	// and uncomment the lines below these lines that uses the traditional CCDirector scene startup.
-//	viewController = [[CCNodeController controller] retain];
-//	viewController.doesAutoRotate = YES;
-//	[viewController runSceneOnNode: mainLayer];		// attach the layer to the controller and run a scene with it
+	viewController = [[CCNodeController controller] retain];
+	viewController.doesAutoRotate = YES;
+	[viewController runSceneOnNode: mainLayer];		// attach the layer to the controller and run a scene with it
 	
 	// If a controller is NOT used, uncomment the following standard CCDirector scene startup lines,
 	// and remove the lines above that reference viewContoller.
-	CCScene *scene = [CCScene node];
-	[scene addChild: [Cmput3DMenuLayer scene]];
-	[[CCDirector sharedDirector] runWithScene: scene];
+
+//	CCScene *scene = [CCScene node];
+//	[scene addChild: [Cmput3DMenuLayer scene]];
+//	[[CCDirector sharedDirector] runWithScene: scene];
 	
 }
 

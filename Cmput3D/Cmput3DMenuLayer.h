@@ -3,12 +3,16 @@
 //  Cmput3D
 //
 //  Created by Greg Jaciuk on 12-03-17.
-//  Copyright 2012 __MyCompanyName__. All rights reserved.
+//  Copyright 2012 Greg Jaciuk . All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "CC3Layer.h"
+#import "Cmput3DMenuLayer.h"
+#import "Cmput3DLayer.h"
+#import "Cmput3DWorld.h"
+#import "Cmput3DMenuLayer.h"
 
 
 // Model names
@@ -26,7 +30,7 @@
 @interface Cmput3DMenuLayer : CC3Layer {
 }
 
-//returns the scene that is. Based on the cocos2d layer scheme
-+(CCScene*)scene;
+//returns the scene that is
++(CCScene*) scene;
 
 @end
