@@ -56,7 +56,8 @@
                                             selector:@selector(backToMenu:)];
     
     CCMenu *back = [CCMenu menuWithItems:backButton, nil];
-    [back setPosition:CGPointMake(window.width-440, window.height-20)];
+    [back setPosition:CGPointMake(window.width-(window.width-BTN_OFFSET_LEFT), 
+                                  window.height-BTN_OFFSET_TOP)];
     
     [self addChild:back];
 }
@@ -70,7 +71,7 @@
                                              selector:@selector(increaseNodes:)];
     
     CCMenu *plus = [CCMenu menuWithItems:plusButton, nil];
-    [plus setPosition:CGPointMake(window.width-20, window.height-20)];
+    [plus setPosition:CGPointMake(window.width-BTN_OFFSET_TOP, window.height-BTN_OFFSET_TOP)];
     
     [self addChild:plus];
 }

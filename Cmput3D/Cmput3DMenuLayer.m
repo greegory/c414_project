@@ -32,6 +32,8 @@
 }
 
 -(void)setUpMenus{
+    CGSize window = (CGSize)[[CCDirector sharedDirector] winSize];
+    
     CCMenuItem *menuItem1 = [CCMenuItemImage itemFromNormalImage:@"circle_Label.png" 
                                                    selectedImage:@"circle_Label_selected.png" 
                                                           target:self
@@ -53,6 +55,8 @@
     
 	// Arrange the menu items vertically
 	[myMenu alignItemsVertically];
+    
+    [myMenu setPosition: CGPointMake(window.width/2, window.height/2)];
     
 	// add the menu to the scene
 	[self addChild:myMenu];

@@ -63,7 +63,7 @@
 								  numberOfSamples: 4];
 	
 	// Turn on multiple touches if needed
-	[glView setMultipleTouchEnabled: YES];
+	[glView setMultipleTouchEnabled: NO];
 	
 	// attach the openglView to the director
 	[director setOpenGLView:glView];

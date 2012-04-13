@@ -18,8 +18,6 @@
 		56B6555E15150C3D00CE1B49 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56B6555D15150C3D00CE1B49 /* UIKit.framework */; };
 		56B6556015150C3D00CE1B49 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56B6555F15150C3D00CE1B49 /* Foundation.framework */; };
 		56B6556215150C3D00CE1B49 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56B6556115150C3D00CE1B49 /* CoreGraphics.framework */; };
-		56B6556815150C3D00CE1B49 /* CC3ModelSampleFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B6556715150C3D00CE1B49 /* CC3ModelSampleFactory.m */; };
-		56B6556B15150C3D00CE1B49 /* CC3PointParticleSamples.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B6556A15150C3D00CE1B49 /* CC3PointParticleSamples.m */; };
 		56B6557015150C3D00CE1B49 /* CC3IdentifiablePODExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B6556F15150C3D00CE1B49 /* CC3IdentifiablePODExtensions.m */; };
 		56B6557315150C3D00CE1B49 /* CC3NodePODExtensions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 56B6557215150C3D00CE1B49 /* CC3NodePODExtensions.mm */; };
 		56B6557615150C3D00CE1B49 /* CC3PODCamera.mm in Sources */ = {isa = PBXBuildFile; fileRef = 56B6557515150C3D00CE1B49 /* CC3PODCamera.mm */; };
@@ -228,11 +226,6 @@
 		56B6555D15150C3D00CE1B49 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		56B6555F15150C3D00CE1B49 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		56B6556115150C3D00CE1B49 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		56B6556615150C3D00CE1B49 /* CC3ModelSampleFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CC3ModelSampleFactory.h; path = cocos3d/cc3Extras/CC3ModelSampleFactory.h; sourceTree = "<group>"; };
-		56B6556715150C3D00CE1B49 /* CC3ModelSampleFactory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CC3ModelSampleFactory.m; path = cocos3d/cc3Extras/CC3ModelSampleFactory.m; sourceTree = "<group>"; };
-		56B6556915150C3D00CE1B49 /* CC3PointParticleSamples.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CC3PointParticleSamples.h; path = cocos3d/cc3Extras/CC3PointParticleSamples.h; sourceTree = "<group>"; };
-		56B6556A15150C3D00CE1B49 /* CC3PointParticleSamples.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CC3PointParticleSamples.m; path = cocos3d/cc3Extras/CC3PointParticleSamples.m; sourceTree = "<group>"; };
-		56B6556C15150C3D00CE1B49 /* teapot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = teapot.h; path = cocos3d/cc3Extras/teapot.h; sourceTree = "<group>"; };
 		56B6556E15150C3D00CE1B49 /* CC3IdentifiablePODExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CC3IdentifiablePODExtensions.h; path = cocos3d/cc3PVR/CC3IdentifiablePODExtensions.h; sourceTree = "<group>"; };
 		56B6556F15150C3D00CE1B49 /* CC3IdentifiablePODExtensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CC3IdentifiablePODExtensions.m; path = cocos3d/cc3PVR/CC3IdentifiablePODExtensions.m; sourceTree = "<group>"; };
 		56B6557115150C3D00CE1B49 /* CC3NodePODExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CC3NodePODExtensions.h; path = cocos3d/cc3PVR/CC3NodePODExtensions.h; sourceTree = "<group>"; };
@@ -697,24 +690,11 @@
 		56B6556415150C3D00CE1B49 /* cocos3d */ = {
 			isa = PBXGroup;
 			children = (
-				56B6556515150C3D00CE1B49 /* cc3Extras */,
 				56B6556D15150C3D00CE1B49 /* cc3PVR */,
 				56B655C115150C3E00CE1B49 /* CCNodeController */,
 				56B655C815150C3E00CE1B49 /* cocos3d */,
 			);
 			name = cocos3d;
-			sourceTree = "<group>";
-		};
-		56B6556515150C3D00CE1B49 /* cc3Extras */ = {
-			isa = PBXGroup;
-			children = (
-				56B6556615150C3D00CE1B49 /* CC3ModelSampleFactory.h */,
-				56B6556715150C3D00CE1B49 /* CC3ModelSampleFactory.m */,
-				56B6556915150C3D00CE1B49 /* CC3PointParticleSamples.h */,
-				56B6556A15150C3D00CE1B49 /* CC3PointParticleSamples.m */,
-				56B6556C15150C3D00CE1B49 /* teapot.h */,
-			);
-			name = cc3Extras;
 			sourceTree = "<group>";
 		};
 		56B6556D15150C3D00CE1B49 /* cc3PVR */ = {
@@ -939,8 +919,8 @@
 				56B657D81515201800CE1B49 /* square_Label.png */,
 				56B657CF1515187100CE1B49 /* circle_Label_selected.png */,
 				56B657D01515187100CE1B49 /* circle_Label.png */,
-				56B6565615150C4000CE1B49 /* Default.png */,
 				56B6565815150C4000CE1B49 /* fps_images.png */,
+				56B6565615150C4000CE1B49 /* Default.png */,
 				56B6565A15150C4000CE1B49 /* Icon-72.png */,
 				56B6565C15150C4000CE1B49 /* Icon-Small-50.png */,
 				56B6565E15150C4000CE1B49 /* Icon-Small.png */,
@@ -1373,8 +1353,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				56B6556815150C3D00CE1B49 /* CC3ModelSampleFactory.m in Sources */,
-				56B6556B15150C3D00CE1B49 /* CC3PointParticleSamples.m in Sources */,
 				56B6557015150C3D00CE1B49 /* CC3IdentifiablePODExtensions.m in Sources */,
 				56B6557315150C3D00CE1B49 /* CC3NodePODExtensions.mm in Sources */,
 				56B6557615150C3D00CE1B49 /* CC3PODCamera.mm in Sources */,
