@@ -29,11 +29,12 @@ typedef enum {
 //    ROUND_THREE
 //} Rnd;
 
+//game variables
 #define TEST_LENGTH 30
 #define DEPTH_CHANGE 20
 #define OBJECT_SCALE 40
-#define BASE_OBJ 1
-#define SIMPLE_OBJ 2
+#define BASE_OBJECT 1
+#define SIMPLE_OBJECT 2
 #define CORRECT 1
 #define INCORRECT 0
 #define SET_LEFT .33
@@ -46,24 +47,24 @@ typedef enum {
     NSMutableArray *selectionTracker;
     NSMutableArray *depthTracker;
     
-    CC3Node *currentNode;
-    NSString *currentNodeName;
+    CC3Node *currentNode; //Template node being used i.e. buddha, dragon, bunny
+    NSString *currentNodeName; 
     CC3Camera *camera;
     CC3Light *lamp;
     CC3Node* origCamTarget;
 	CC3Node* camTarget;
-    CC3Node *selectedNode;
+    CC3Node *selectedNode; // The last node that was selected by the user touch
+    CGPoint lastTouchPoint;
     
     CameraZoomType cameraZoomType;
-    uint currentNodeIdx;
-
+    uint currentNodeIdx; //index reference for the templateNodes Array
     
     CGFloat depth;
     uint testCount;
     BOOL firstGuess;
     BOOL secondGuess;
     BOOL wrongGuess;
-    uint LODidx;
+    uint LODidx; //index reference for the level of detail 
     
     CGSize windowSize;
     
@@ -79,12 +80,24 @@ typedef enum {
 //placed on the screen via [self addChild:aNode]
 -(void)initializeTemplates;
 
+//3dLayer needs to uncomment cctouchmoved method for this method to work Cmput3DLayer
+//This layer gets called on every pixel change from the touch. The touchpoint is
+//re-sent every time. Last touch needs to be remembered to compare it against
+-(void)rotateMainNodeFromSwipeAt: (CGPoint) touchPoint;
+
 //this sets the initial object to 1 of 3 objects in the template array
 //this is based on an index that is passed by the menu layer
 -(void)setSelectedObject:(uint) kname;
 -(void)nextRound;
 
+// adds another current object to the touchpoint
+-(void)increaseNodeByOne: (CGPoint) touchpoint;
+
 -(void)addCamera;
 -(void)addLamp;
+
+-(void)initWithBunny;
+-(void)initWithBuddha;
+-(void)initWithDinosaur;
 
 @end

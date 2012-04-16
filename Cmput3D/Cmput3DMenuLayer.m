@@ -34,21 +34,33 @@
 -(void)setUpMenus{
     CGSize window = (CGSize)[[CCDirector sharedDirector] winSize];
     
-    CCMenuItem *menuItem1 = [CCMenuItemImage itemFromNormalImage:@"circle_Label.png" 
-                                                   selectedImage:@"circle_Label_selected.png" 
-                                                          target:self
-                                                        selector:@selector(worldWithCircle:)];
+//    CCMenuItem *menuItem1 = [CCMenuItemImage itemFromNormalImage:@"circle_Label.png" 
+//                                                   selectedImage:@"circle_Label_selected.png" 
+//                                                          target:self
+//                                                        selector:@selector(worldWithCircle:)];
+//    
+//    CCMenuItem *menuItem2 = [CCMenuItemImage itemFromNormalImage:@"square_Label.png"
+//                                                   selectedImage: @"square_Label_selected.png"
+//                                                          target:self
+//                                                        selector:@selector(worldWithSquare:)];
+//    
+//    
+//	CCMenuItemImage * menuItem3 = [CCMenuItemImage itemFromNormalImage:@"complex_Label.png"
+//                                                         selectedImage: @"complex_Label_selected.png"
+//                                                                target:self
+//                                                              selector:@selector(worldWithComplex:)];
     
-    CCMenuItem *menuItem2 = [CCMenuItemImage itemFromNormalImage:@"square_Label.png"
-                                                   selectedImage: @"square_Label_selected.png"
-                                                          target:self
-                                                        selector:@selector(worldWithSquare:)];
+    CCMenuItem *menuItem1 = [CCMenuItemFont itemFromString:@"Bunny" 
+                                                    target:self 
+                                                  selector:@selector(worldWithBeachBall:)];
     
+    CCMenuItem *menuItem2 = [CCMenuItemFont itemFromString:@"Budda" 
+                                                    target:self 
+                                                  selector:@selector(worldWithBuddha:)];
     
-	CCMenuItemImage * menuItem3 = [CCMenuItemImage itemFromNormalImage:@"complex_Label.png"
-                                                         selectedImage: @"complex_Label_selected.png"
-                                                                target:self
-                                                              selector:@selector(worldWithComplex:)];
+    CCMenuItem *menuItem3 = [CCMenuItemFont itemFromString:@"Dinosaur" 
+                                                    target:self 
+                                                  selector:@selector(worldWithDieCube:)];
     
     // Create a menu and add menu items to it
 	CCMenu * myMenu = [CCMenu menuWithItems:menuItem1, menuItem2, menuItem3, nil];
@@ -100,10 +112,12 @@
     
     int idx = 0;
     
-    if (kname == kDieCubeName)
+    if (kname == kDinoName0)
         idx = 2;
-    else if (kname == kBoxName)
+    else if (kname == kBuddhaName0)
         idx = 1;
+    else
+        idx = 0;
         
     
     CC3Layer* cc3Layer = [Cmput3DLayer layerWithColor: ccc4(100, 120, 220, 255)];
@@ -127,20 +141,20 @@
 
 
 //Menu items
-- (void) worldWithCircle: (CCMenuItem  *) menuItem {
+- (void) worldWithBeachBall: (CCMenuItem  *) menuItem {
     
-    [self worldWith:kBeachBallName];
-	NSLog(@"The Circle menu was called");
+    [self worldWith:kBunnyName0];
+	NSLog(@"The Bunny menu was called");
 }
 
-- (void) worldWithSquare: (CCMenuItem  *) menuItem {
-    [self worldWith:kBoxName];
-	NSLog(@"The Square menu was called");
+- (void) worldWithBuddha: (CCMenuItem  *) menuItem {
+    [self worldWith:kBuddhaName0];
+	NSLog(@"The Buddha menu was called");
 }
 
-- (void) worldWithComplex: (CCMenuItem  *) menuItem {
-    [self worldWith:kDieCubeName];
-	NSLog(@"The Complex menu was called");
+- (void) worldWithDieCube: (CCMenuItem  *) menuItem {
+    [self worldWith:kDinoName0];
+	NSLog(@"The Dinosaur menu was called");
 }
 
 -(void)dealloc{

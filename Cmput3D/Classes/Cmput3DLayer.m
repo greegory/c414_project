@@ -15,6 +15,7 @@
 -(void)addPlusMinusButton;
 -(void)addSlider;
 -(void)initializeControls;
+-(BOOL) handleTouch: (UITouch*) touch ofType: (uint) touchType;
 
 @property (nonatomic, readonly) Cmput3DWorld* cmputWorld;
 @end
@@ -161,6 +162,7 @@
     NSLog(@"HIGH");
 }
 
+
 //-(BOOL) ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
 //    return YES;
 //}
@@ -180,10 +182,10 @@
  // CC3Layer implementation. To receive and handle touch-move events for object
  // picking,uncomment the following method implementation. To receive touch events,
  // you must also set the isTouchEnabled property of this instance to YES.
-/*
+
  // Handles intermediate finger-moved touch events. 
 -(void) ccTouchMoved: (UITouch *)touch withEvent: (UIEvent *)event {
 	[self handleTouch: touch ofType: kCCTouchMoved];
 }
-*/
+
 @end

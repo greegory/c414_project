@@ -8,6 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		5617F1F11518EE9B0031F2AD /* ZoomButton48x48.png in Resources */ = {isa = PBXBuildFile; fileRef = 5617F1F01518EE9B0031F2AD /* ZoomButton48x48.png */; };
+		566849D3153A409C00D0DF05 /* buddha-2983v.pod in Resources */ = {isa = PBXBuildFile; fileRef = 566849D2153A409B00D0DF05 /* buddha-2983v.pod */; };
+		566849D7153A479800D0DF05 /* buddha-2983v-298.pod in Resources */ = {isa = PBXBuildFile; fileRef = 566849D6153A479800D0DF05 /* buddha-2983v-298.pod */; };
+		566849D9153A486000D0DF05 /* buddha-2983v-571.pod in Resources */ = {isa = PBXBuildFile; fileRef = 566849D8153A486000D0DF05 /* buddha-2983v-571.pod */; };
+		566849DB153A48EE00D0DF05 /* buddha-2983v-894.pod in Resources */ = {isa = PBXBuildFile; fileRef = 566849DA153A48EE00D0DF05 /* buddha-2983v-894.pod */; };
+		566849DD153A494300D0DF05 /* buddha-2983v-1192.pod in Resources */ = {isa = PBXBuildFile; fileRef = 566849DC153A494200D0DF05 /* buddha-2983v-1192.pod */; };
+		566849DF153A499800D0DF05 /* buddha-2983v-1490.pod in Resources */ = {isa = PBXBuildFile; fileRef = 566849DE153A499800D0DF05 /* buddha-2983v-1490.pod */; };
+		566849E1153A49EA00D0DF05 /* buddha-2983v-1788.pod in Resources */ = {isa = PBXBuildFile; fileRef = 566849E0153A49E900D0DF05 /* buddha-2983v-1788.pod */; };
+		566849E3153A4A3E00D0DF05 /* buddha-2983v-2086.pod in Resources */ = {isa = PBXBuildFile; fileRef = 566849E2153A4A3E00D0DF05 /* buddha-2983v-2086.pod */; };
+		566849E5153A4A9000D0DF05 /* buddha-2983v-2384.pod in Resources */ = {isa = PBXBuildFile; fileRef = 566849E4153A4A9000D0DF05 /* buddha-2983v-2384.pod */; };
+		566849E7153A4ADD00D0DF05 /* buddha-2983v-2682.pod in Resources */ = {isa = PBXBuildFile; fileRef = 566849E6153A4ADD00D0DF05 /* buddha-2983v-2682.pod */; };
+		566849E9153A4B2900D0DF05 /* buddha-2983v-2903.pod in Resources */ = {isa = PBXBuildFile; fileRef = 566849E8153A4B2900D0DF05 /* buddha-2983v-2903.pod */; };
 		567AAB86151667C000AB26D8 /* arial16.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 567AAB84151667C000AB26D8 /* arial16.fnt */; };
 		567AAB87151667C000AB26D8 /* arial16.png in Resources */ = {isa = PBXBuildFile; fileRef = 567AAB85151667C000AB26D8 /* arial16.png */; };
 		56B6555415150C3D00CE1B49 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56B6555315150C3D00CE1B49 /* QuartzCore.framework */; };
@@ -215,6 +226,18 @@
 
 /* Begin PBXFileReference section */
 		5617F1F01518EE9B0031F2AD /* ZoomButton48x48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ZoomButton48x48.png; path = Resources/ZoomButton48x48.png; sourceTree = "<group>"; };
+		566849D2153A409B00D0DF05 /* buddha-2983v.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "buddha-2983v.pod"; path = "Resources/buddha-2983v.pod"; sourceTree = "<group>"; };
+		566849D4153A41A100D0DF05 /* buddha-2983v.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "buddha-2983v.pod"; path = "Resources/buddha-2983v.pod"; sourceTree = "<group>"; };
+		566849D6153A479800D0DF05 /* buddha-2983v-298.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "buddha-2983v-298.pod"; path = "Resources/buddha-2983v-298.pod"; sourceTree = "<group>"; };
+		566849D8153A486000D0DF05 /* buddha-2983v-571.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "buddha-2983v-571.pod"; path = "Resources/buddha-2983v-571.pod"; sourceTree = "<group>"; };
+		566849DA153A48EE00D0DF05 /* buddha-2983v-894.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "buddha-2983v-894.pod"; path = "Resources/buddha-2983v-894.pod"; sourceTree = "<group>"; };
+		566849DC153A494200D0DF05 /* buddha-2983v-1192.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "buddha-2983v-1192.pod"; path = "Resources/buddha-2983v-1192.pod"; sourceTree = "<group>"; };
+		566849DE153A499800D0DF05 /* buddha-2983v-1490.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "buddha-2983v-1490.pod"; path = "Resources/buddha-2983v-1490.pod"; sourceTree = "<group>"; };
+		566849E0153A49E900D0DF05 /* buddha-2983v-1788.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "buddha-2983v-1788.pod"; path = "Resources/buddha-2983v-1788.pod"; sourceTree = "<group>"; };
+		566849E2153A4A3E00D0DF05 /* buddha-2983v-2086.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "buddha-2983v-2086.pod"; path = "Resources/buddha-2983v-2086.pod"; sourceTree = "<group>"; };
+		566849E4153A4A9000D0DF05 /* buddha-2983v-2384.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "buddha-2983v-2384.pod"; path = "Resources/buddha-2983v-2384.pod"; sourceTree = "<group>"; };
+		566849E6153A4ADD00D0DF05 /* buddha-2983v-2682.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "buddha-2983v-2682.pod"; path = "Resources/buddha-2983v-2682.pod"; sourceTree = "<group>"; };
+		566849E8153A4B2900D0DF05 /* buddha-2983v-2903.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "buddha-2983v-2903.pod"; path = "Resources/buddha-2983v-2903.pod"; sourceTree = "<group>"; };
 		567AAB84151667C000AB26D8 /* arial16.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = arial16.fnt; path = Resources/arial16.fnt; sourceTree = "<group>"; };
 		567AAB85151667C000AB26D8 /* arial16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arial16.png; path = Resources/arial16.png; sourceTree = "<group>"; };
 		56B6554F15150C3D00CE1B49 /* Cmput3D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cmput3D.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -910,8 +933,20 @@
 				567AAB84151667C000AB26D8 /* arial16.fnt */,
 				567AAB85151667C000AB26D8 /* arial16.png */,
 				56B657DF1515360500CE1B49 /* Balls.pod */,
+				566849E0153A49E900D0DF05 /* buddha-2983v-1788.pod */,
+				566849E8153A4B2900D0DF05 /* buddha-2983v-2903.pod */,
+				566849E6153A4ADD00D0DF05 /* buddha-2983v-2682.pod */,
+				566849E4153A4A9000D0DF05 /* buddha-2983v-2384.pod */,
+				566849E2153A4A3E00D0DF05 /* buddha-2983v-2086.pod */,
+				566849DE153A499800D0DF05 /* buddha-2983v-1490.pod */,
+				566849DA153A48EE00D0DF05 /* buddha-2983v-894.pod */,
+				566849DC153A494200D0DF05 /* buddha-2983v-1192.pod */,
+				566849D8153A486000D0DF05 /* buddha-2983v-571.pod */,
+				566849D6153A479800D0DF05 /* buddha-2983v-298.pod */,
+				566849D4153A41A100D0DF05 /* buddha-2983v.pod */,
 				5617F1F01518EE9B0031F2AD /* ZoomButton48x48.png */,
 				56B657D41515201800CE1B49 /* back_Label.png */,
+				566849D4153A41A100D0DF05 /* buddha-2983v.pod */,
 				56B657E11515384F00CE1B49 /* DieCube.pod */,
 				56B657D51515201800CE1B49 /* complex_Label_selected.png */,
 				56B657D61515201800CE1B49 /* complex_Label.png */,
@@ -1299,6 +1334,9 @@
 /* Begin PBXProject section */
 		56B6554615150C3D00CE1B49 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0410;
+			};
 			buildConfigurationList = 56B6554915150C3D00CE1B49 /* Build configuration list for PBXProject "Cmput3D" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -1343,6 +1381,17 @@
 				567AAB86151667C000AB26D8 /* arial16.fnt in Resources */,
 				567AAB87151667C000AB26D8 /* arial16.png in Resources */,
 				5617F1F11518EE9B0031F2AD /* ZoomButton48x48.png in Resources */,
+				566849D3153A409C00D0DF05 /* buddha-2983v.pod in Resources */,
+				566849D7153A479800D0DF05 /* buddha-2983v-298.pod in Resources */,
+				566849D9153A486000D0DF05 /* buddha-2983v-571.pod in Resources */,
+				566849DB153A48EE00D0DF05 /* buddha-2983v-894.pod in Resources */,
+				566849DD153A494300D0DF05 /* buddha-2983v-1192.pod in Resources */,
+				566849DF153A499800D0DF05 /* buddha-2983v-1490.pod in Resources */,
+				566849E1153A49EA00D0DF05 /* buddha-2983v-1788.pod in Resources */,
+				566849E3153A4A3E00D0DF05 /* buddha-2983v-2086.pod in Resources */,
+				566849E5153A4A9000D0DF05 /* buddha-2983v-2384.pod in Resources */,
+				566849E7153A4ADD00D0DF05 /* buddha-2983v-2682.pod in Resources */,
+				566849E9153A4B2900D0DF05 /* buddha-2983v-2903.pod in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
