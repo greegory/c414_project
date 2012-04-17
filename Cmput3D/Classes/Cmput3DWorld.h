@@ -31,8 +31,8 @@ typedef enum {
 
 //game variables
 #define TEST_LENGTH 30
-#define DEPTH_CHANGE 20
-#define OBJECT_SCALE 40
+//#define DEPTH_CHANGE 20
+//#define OBJECT_SCALE 40
 #define BASE_OBJECT 1
 #define SIMPLE_OBJECT 2
 #define CORRECT 1
@@ -64,6 +64,9 @@ typedef enum {
     uint currentNodeIdx; //index reference for the templateNodes Array
     
     CGFloat depth;
+    CGFloat depth_change;
+    CGFloat object_scale;
+    
     uint testCount;
     BOOL firstGuess;
     BOOL secondGuess;
@@ -92,7 +95,7 @@ typedef enum {
 //this sets the initial object to 1 of 3 objects in the template array
 //this is based on an index that is passed by the menu layer
 -(void)setSelectedObject:(uint) kname;
-//-(void)calculateGameLogic;
+-(void)calculateGameLogic: (uint) choice;
 -(void)nextRound;
 
 // adds another current object to the touchpoint

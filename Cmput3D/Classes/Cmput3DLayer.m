@@ -118,16 +118,16 @@
 -(void)chooseLeft: (CCMenuItem*) menuItem {
     
     NSLog(@"LEFT CHOICE");
-    //[self.cmputWorld calculateGameLogic];
-   // [self.cmputWorld nextRound];
+    [self.cmputWorld calculateGameLogic: LEFT];
+    [self.cmputWorld nextRound];
 }
 
 
 -(void)chooseRight: (CCMenuItem*) menuItem {
     
     NSLog(@"RIGHT CHOICE");
-    //[self.cmputWorld calculateGameLogic];
-    //[self.cmputWorld nextRound];
+    [self.cmputWorld calculateGameLogic: RIGHT];
+    [self.cmputWorld nextRound];
 }
 
 

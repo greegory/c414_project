@@ -8,8 +8,10 @@
 
 #import "CC3Layer.h"
 
-#define BTN_OFFSET_LEFT 40
-#define BTN_OFFSET_TOP 20
+#define BTN_OFFSET_LEFT     40
+#define BTN_OFFSET_TOP      20
+#define LEFT                0
+#define RIGHT               1
 
 /** A sample application-specific CC3Layer subclass. */
 @interface Cmput3DLayer : CC3Layer {

@@ -47,10 +47,12 @@
         
         windowSize = (CGSize)[[CCDirector sharedDirector] winSize];
         
-        //Need to calculate the depth based on the screen size
+        //Need to calculate the depth, change, and scale based on the screen size
         depth = 0.0;
-        testCount = 0;
+        depth_change = 20;
+        object_scale = 40;
         
+        testCount = 0;
         firstGuess = NO;
         secondGuess = NO;
         wrongGuess = NO;     
@@ -195,8 +197,56 @@
     [self nextRound];
 }
 
-
--(void) nextRound{
+-(void) calculateGameLogic: (uint) choice{
+    
+//    if (selectedNode != nil){
+//        for (CC3Node* child in children) {
+//            
+//            if (selectedNode == child && selectedNode.tag == BASE_OBJECT){
+//                if (firstGuess) secondGuess = YES;
+//                
+//                [selectionTracker addObject:[NSNumber numberWithInt:CORRECT]];
+//                [depthTracker addObject:[NSNumber numberWithFloat:depth]];
+//                firstGuess = YES;
+//            }
+//            else if (selectedNode.tag == SIMPLE_OBJECT){
+//                [selectionTracker addObject:[NSNumber numberWithInt:INCORRECT]];
+//                [depthTracker addObject:[NSNumber numberWithFloat:depth]];
+//                firstGuess = NO;
+//                secondGuess = NO;
+//                wrongGuess = YES;
+//            }
+//        }
+//        
+//        testCount++;
+//    }
+      
+    if (leftNode.tag == BASE_OBJECT && choice == LEFT){
+        if (firstGuess){ secondGuess = YES;NSLog(@"second guess correct");}
+        
+        [selectionTracker addObject:[NSNumber numberWithInt:CORRECT]];
+        [depthTracker addObject:[NSNumber numberWithFloat:depth]];
+        firstGuess = YES;
+        NSLog(@"First guess correct");
+    }
+    else if (leftNode.tag == SIMPLE_OBJECT && choice == RIGHT){
+        if (firstGuess){ secondGuess = YES;NSLog(@"second guess correct");}
+        
+        [selectionTracker addObject:[NSNumber numberWithInt:CORRECT]];
+        [depthTracker addObject:[NSNumber numberWithFloat:depth]];
+        firstGuess = YES;
+        NSLog(@"First guess correct");
+    }
+    else {
+        [selectionTracker addObject:[NSNumber numberWithInt:INCORRECT]];
+        [depthTracker addObject:[NSNumber numberWithFloat:depth]];
+        firstGuess = NO;
+        secondGuess = NO;
+        wrongGuess = YES;
+        NSLog(@"First guess wrong");
+    }
+    
+    testCount++;
     
     if (testCount == TEST_LENGTH) {
         for (NSNumber* num in selectionTracker) {
@@ -209,23 +259,9 @@
          [CCTransitionFade transitionWithDuration:0.5f scene:[Cmput3DMenuLayer scene]]];
     }
     else{
-    
-        [self removeAllChildren];
-
-        CGFloat baseNodeOffset, simpleNodeOffset;
-        
-        int i = random()%10;
-        if (i%2 == 0){
-            baseNodeOffset = SET_LEFT;
-            simpleNodeOffset = SET_RIGHT;
-        }
-        else {
-            baseNodeOffset = SET_RIGHT;
-            simpleNodeOffset = SET_LEFT;
-        }
         
         if (secondGuess){
-            depth -= DEPTH_CHANGE;
+            depth -= depth_change;
             firstGuess = NO;
             secondGuess = NO;
             wrongGuess = NO;
@@ -233,41 +269,59 @@
                 LODidx += 1;
         }
         else if (wrongGuess){
-            depth += DEPTH_CHANGE;
+            depth += depth_change;
             firstGuess = NO;
             secondGuess = NO;
             wrongGuess = NO;
             if (LODidx > 0) 
                 LODidx -= 1;
         }
-        
-        CC3Node *aNode = [currentNode copyAutoreleased];
-        
-        aNode.location = cc3v(windowSize.width*baseNodeOffset, windowSize.height/2, depth);
-        aNode.uniformScale *= OBJECT_SCALE;
-        aNode.isTouchEnabled = YES;
-        aNode.tag = BASE_OBJECT;
-        
-        CC3Node *aNode2 = [(CC3Node*)[simpleNodes objectAtIndex: LODidx] copyAutoreleased];
-        
-        aNode2.location = cc3v(windowSize.width*simpleNodeOffset, windowSize.height/2, depth);
-        aNode2.uniformScale *= OBJECT_SCALE;
-        aNode2.isTouchEnabled = YES;
-        aNode2.tag = SIMPLE_OBJECT;
-        
-//        CCActionInterval* partialRot = [CC3RotateBy actionWithDuration: 1.0
-//                                                              rotateBy: cc3v(0.0, 30.0, 0.0)];
-//        CCActionInterval* partialRot2 = [CC3RotateBy actionWithDuration: 1.0
-//                                                               rotateBy: cc3v(0.0, 30.0, 0.0)];
-//        
-//        [aNode runAction: [CCRepeatForever actionWithAction: partialRot]];
-//        [aNode2 runAction: [CCRepeatForever actionWithAction: partialRot2]];
-//        
-        [self addChild:aNode] ;
-        [self addChild:aNode2];    
-        [self addLamp];
-        
     }
+}
+
+-(void) nextRound{
+    
+    int i = arc4random()%10;
+    CGFloat baseNodeOffset, simpleNodeOffset;
+    
+    [self removeAllChildren];
+    
+    if (i%2 == 0){
+        baseNodeOffset = SET_LEFT;
+        simpleNodeOffset = SET_RIGHT;
+    }
+    else {
+        baseNodeOffset = SET_RIGHT;
+        simpleNodeOffset = SET_LEFT;
+    }
+    
+    CC3Node *aNode = [(CC3Node*)[templateNodes objectAtIndex:currentNodeIdx] copyAutoreleased];
+    
+    aNode.location = cc3v(windowSize.width*baseNodeOffset, windowSize.height/2, depth);
+    aNode.uniformScale *= object_scale;
+    aNode.isTouchEnabled = YES;
+    aNode.tag = BASE_OBJECT;
+    
+    CC3Node *aNode2 = [(CC3Node*)[simpleNodes objectAtIndex: LODidx] copyAutoreleased];
+    
+    aNode2.location = cc3v(windowSize.width*simpleNodeOffset, windowSize.height/2, depth);
+    aNode2.uniformScale *= object_scale;
+    aNode2.isTouchEnabled = YES;
+    aNode2.tag = SIMPLE_OBJECT;
+     
+    if (baseNodeOffset < 0.5){
+        leftNode = aNode;
+        rightNode = aNode2;
+    }
+    else {
+        leftNode = aNode2;
+        rightNode = aNode;
+    }
+        
+    [self addChild:aNode] ;
+    [self addChild:aNode2];    
+    [self addLamp];
+       
 }
 
 -(void) touchEvent: (uint) touchType at: (CGPoint) touchPoint {
@@ -337,27 +391,6 @@
 	// Remember the node that was selected
 	selectedNode = aNode;
     
-    if (selectedNode != nil){
-        for (CC3Node* child in children) {
-            
-            if (aNode == child && aNode.tag == BASE_OBJECT){
-                if (firstGuess) secondGuess = YES;
-                
-                [selectionTracker addObject:[NSNumber numberWithInt:CORRECT]];
-                [depthTracker addObject:[NSNumber numberWithFloat:depth]];
-                firstGuess = YES;
-            }
-            else if (aNode.tag == SIMPLE_OBJECT){
-                [selectionTracker addObject:[NSNumber numberWithInt:INCORRECT]];
-                [depthTracker addObject:[NSNumber numberWithFloat:depth]];
-                firstGuess = NO;
-                secondGuess = NO;
-                wrongGuess = YES;
-            }
-        }
-
-        testCount++;
-    }
 }
 
 
@@ -640,6 +673,14 @@
                                                            rotateBy: cc3v(0.0, 30.0, 0.0)];
      [aNode runAction: [CCRepeatForever actionWithAction: partialRot]];
      
+     //        CCActionInterval* partialRot = [CC3RotateBy actionWithDuration: 1.0
+     //                                                              rotateBy: cc3v(0.0, 30.0, 0.0)];
+     //        CCActionInterval* partialRot2 = [CC3RotateBy actionWithDuration: 1.0
+     //                                                               rotateBy: cc3v(0.0, 30.0, 0.0)];
+     //        
+     //        [aNode runAction: [CCRepeatForever actionWithAction: partialRot]];
+     //        [aNode2 runAction: [CCRepeatForever actionWithAction: partialRot2]];
+     //   
      [self addChild:aNode];
      
      [self createGLBuffers];			// Copy vertex data to OpenGL VBO's.
