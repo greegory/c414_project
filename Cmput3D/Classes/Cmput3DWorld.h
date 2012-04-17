@@ -54,6 +54,10 @@ typedef enum {
     CC3Node* origCamTarget;
 	CC3Node* camTarget;
     CC3Node *selectedNode; // The last node that was selected by the user touch
+    
+    CC3Node *leftNode;
+    CC3Node *rightNode;
+    
     CGPoint lastTouchPoint;
     
     CameraZoomType cameraZoomType;
@@ -88,6 +92,7 @@ typedef enum {
 //this sets the initial object to 1 of 3 objects in the template array
 //this is based on an index that is passed by the menu layer
 -(void)setSelectedObject:(uint) kname;
+//-(void)calculateGameLogic;
 -(void)nextRound;
 
 // adds another current object to the touchpoint

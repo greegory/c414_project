@@ -16,9 +16,11 @@
 
     CCMenuItem *backButton;
     CCMenuItem *plusButton;
-    CCMenuItem *lowButton;
-    CCMenuItem *medButton;
-    CCMenuItem *highButton;
+    
+    CCMenuItem *leftButton;
+    CCMenuItem *rightButton;
+    
+    CGSize windowSize; 
     
 }
 

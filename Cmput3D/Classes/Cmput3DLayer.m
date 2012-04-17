@@ -13,7 +13,7 @@
 @interface Cmput3DLayer (TemplateMethods)
 -(void)addBackButton;
 -(void)addPlusMinusButton;
--(void)addSlider;
+-(void)addDecisionButtons;
 -(void)initializeControls;
 -(BOOL) handleTouch: (UITouch*) touch ofType: (uint) touchType;
 
@@ -24,18 +24,19 @@
 - (void)dealloc {    
     backButton = nil;
     plusButton = nil;
-    lowButton = nil;
-    medButton = nil;
-    highButton = nil;
+    leftButton = nil;
+    rightButton = nil;
     
     [super dealloc];
 }
 
 -(void) initializeControls {
     
+    windowSize = (CGSize)[[CCDirector sharedDirector] winSize];
+    
     [self addBackButton];   
     // [self addPlusMinusButton];
-    //[self addSlider];
+    [self addDecisionButtons];
     self.isTouchEnabled = YES;
 }
 
@@ -49,22 +50,20 @@
 }
 
 -(void)addBackButton{
-    CGSize window = (CGSize)[[CCDirector sharedDirector] winSize];
-    
+
     backButton = [CCMenuItemImage itemFromNormalImage:@"back_Label.png" 
                                         selectedImage:@"back_Label_selected.png" 
                                                target:self
                                             selector:@selector(backToMenu:)];
     
     CCMenu *back = [CCMenu menuWithItems:backButton, nil];
-    [back setPosition:CGPointMake(window.width-(window.width-BTN_OFFSET_LEFT), 
-                                  window.height-BTN_OFFSET_TOP)];
+    [back setPosition:CGPointMake(windowSize.width-(windowSize.width-BTN_OFFSET_LEFT), 
+                                  windowSize.height-BTN_OFFSET_TOP)];
     
     [self addChild:back];
 }
 
 -(void)addPlusMinusButton{
-    CGSize window = (CGSize)[[CCDirector sharedDirector] winSize];
     
     plusButton = [CCMenuItemImage itemFromNormalImage:@"ZoomButton48x48.png" 
                                         selectedImage:@"ZoomButton48x48.png" 
@@ -72,51 +71,29 @@
                                              selector:@selector(increaseNodes:)];
     
     CCMenu *plus = [CCMenu menuWithItems:plusButton, nil];
-    [plus setPosition:CGPointMake(window.width-BTN_OFFSET_TOP, window.height-BTN_OFFSET_TOP)];
+    [plus setPosition:CGPointMake(windowSize.width-BTN_OFFSET_TOP, windowSize.height-BTN_OFFSET_TOP)];
     
     [self addChild:plus];
 }
 
--(void)addSlider {
-    CGSize window = (CGSize)[[CCDirector sharedDirector] winSize];
+-(void)addDecisionButtons {
     
-    lowButton = [CCMenuItemFont itemFromString:@"low"
+    leftButton = [CCMenuItemFont itemFromString:@"LEFT"
                                         target:self 
-                                      selector:@selector(slideLow:)];
+                                      selector:@selector(chooseLeft:)];
     
     
-    medButton = [CCMenuItemFont itemFromString:@"medium"
-                                        target:self
-                                      selector:@selector(slideMed:)];
-    
-    highButton = [CCMenuItemFont itemFromString:@"high"
+    rightButton = [CCMenuItemFont itemFromString:@"RIGHT"
                                          target:self
-                                       selector:@selector(slideHigh:)];
+                                       selector:@selector(chooseRight:)];
     
-//    lowButton = [CCMenuItemImage itemFromNormalImage:@"Icon-Small.png" 
-//                                       selectedImage:@"Icon-Small-50.png" 
-//                                              target:self 
-//                                            selector:@selector(slideLow:)];
-//    
-//    
-//    medButton = [CCMenuItemImage itemFromNormalImage:@"Icon-Small.png"
-//                                       selectedImage:@"Icon-Small-50.png"
-//                                              target:self 
-//                                            selector:@selector(slideMed:)];
-//    
-//    highButton = [CCMenuItemImage itemFromNormalImage:@"Icon-Small.png"
-//                                        selectedImage:@"Icon-Small-50.png"
-//                                               target:self 
-//                                             selector:@selector(slideHigh:)];
-//    
     
     CCMenu *slide = [CCMenu menuWithItems: nil];
-    [slide addChild:lowButton z:0 tag:11];
-    [slide addChild:medButton z:0 tag:22];
-    [slide addChild:highButton z:0 tag:33];
+    [slide addChild:leftButton z:0 tag:11];
+    [slide addChild:rightButton z:0 tag:33];
     
-    [slide setPosition:CGPointMake(window.width/2, 20)];
-    [slide alignItemsHorizontallyWithPadding:50];
+    [slide setPosition:CGPointMake(windowSize.width/2, 20)];
+    [slide alignItemsHorizontallyWithPadding:100];
     
     [self addChild:slide];
     
@@ -136,30 +113,21 @@
 }
 
 /*
- *Menu times for the simplification levels
+ *Menu times for the user selection
  */
--(void)slideLow: (CCMenuItem*) menuItem {
+-(void)chooseLeft: (CCMenuItem*) menuItem {
     
-    CGSize window = (CGSize)[[CCDirector sharedDirector] winSize];
-    NSLog(@"%f, %f", window.width, window.height);
-    
-    NSLog(@"LOW");
+    NSLog(@"LEFT CHOICE");
+    //[self.cmputWorld calculateGameLogic];
+   // [self.cmputWorld nextRound];
 }
 
--(void)slideMed: (CCMenuItem*) menuItem {
-    for (CC3Node* c in [self.cmputWorld children]){
-        if (![c isKindOfClass:[CC3Light class]])
-            c.location = cc3v(c.location.x, c.location.y, c.location.z-100);
-    }
-    NSLog(@"MEDIUM");
-}
 
--(void)slideHigh: (CCMenuItem*) menuItem {
-    for (CC3Node* c in [self.cmputWorld children]){
-        if (![c isKindOfClass:[CC3Light class]])
-            c.location = cc3v(c.location.x, c.location.y, c.location.z+100);
-    }
-    NSLog(@"HIGH");
+-(void)chooseRight: (CCMenuItem*) menuItem {
+    
+    NSLog(@"RIGHT CHOICE");
+    //[self.cmputWorld calculateGameLogic];
+    //[self.cmputWorld nextRound];
 }
 
 

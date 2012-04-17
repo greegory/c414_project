@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		560B9484153D4F2900E4579C /* buddha-2983v.pod in Resources */ = {isa = PBXBuildFile; fileRef = 560B9483153D4F2900E4579C /* buddha-2983v.pod */; };
 		5617F1F11518EE9B0031F2AD /* ZoomButton48x48.png in Resources */ = {isa = PBXBuildFile; fileRef = 5617F1F01518EE9B0031F2AD /* ZoomButton48x48.png */; };
-		566849D3153A409C00D0DF05 /* buddha-2983v.pod in Resources */ = {isa = PBXBuildFile; fileRef = 566849D2153A409B00D0DF05 /* buddha-2983v.pod */; };
 		566849D7153A479800D0DF05 /* buddha-2983v-298.pod in Resources */ = {isa = PBXBuildFile; fileRef = 566849D6153A479800D0DF05 /* buddha-2983v-298.pod */; };
 		566849D9153A486000D0DF05 /* buddha-2983v-571.pod in Resources */ = {isa = PBXBuildFile; fileRef = 566849D8153A486000D0DF05 /* buddha-2983v-571.pod */; };
 		566849DB153A48EE00D0DF05 /* buddha-2983v-894.pod in Resources */ = {isa = PBXBuildFile; fileRef = 566849DA153A48EE00D0DF05 /* buddha-2983v-894.pod */; };
@@ -19,6 +19,31 @@
 		566849E5153A4A9000D0DF05 /* buddha-2983v-2384.pod in Resources */ = {isa = PBXBuildFile; fileRef = 566849E4153A4A9000D0DF05 /* buddha-2983v-2384.pod */; };
 		566849E7153A4ADD00D0DF05 /* buddha-2983v-2682.pod in Resources */ = {isa = PBXBuildFile; fileRef = 566849E6153A4ADD00D0DF05 /* buddha-2983v-2682.pod */; };
 		566849E9153A4B2900D0DF05 /* buddha-2983v-2903.pod in Resources */ = {isa = PBXBuildFile; fileRef = 566849E8153A4B2900D0DF05 /* buddha-2983v-2903.pod */; };
+		566849EF153CB28A00D0DF05 /* dinosaur5000v.pod in Resources */ = {isa = PBXBuildFile; fileRef = 566849EE153CB28A00D0DF05 /* dinosaur5000v.pod */; };
+		566849F1153CC6CF00D0DF05 /* dinosaur4000v.pod in Resources */ = {isa = PBXBuildFile; fileRef = 566849F0153CC6CF00D0DF05 /* dinosaur4000v.pod */; };
+		566849F3153CC72300D0DF05 /* dinosaur3500v.pod in Resources */ = {isa = PBXBuildFile; fileRef = 566849F2153CC72300D0DF05 /* dinosaur3500v.pod */; };
+		566849F5153CC77100D0DF05 /* dinosaur3000v.pod in Resources */ = {isa = PBXBuildFile; fileRef = 566849F4153CC77000D0DF05 /* dinosaur3000v.pod */; };
+		566849F7153CC7B800D0DF05 /* dinosaur2500v.pod in Resources */ = {isa = PBXBuildFile; fileRef = 566849F6153CC7B800D0DF05 /* dinosaur2500v.pod */; };
+		566849F9153CC81200D0DF05 /* dinosaur2000v.pod in Resources */ = {isa = PBXBuildFile; fileRef = 566849F8153CC81200D0DF05 /* dinosaur2000v.pod */; };
+		566849FB153CC85800D0DF05 /* dinosaur1500v.pod in Resources */ = {isa = PBXBuildFile; fileRef = 566849FA153CC85800D0DF05 /* dinosaur1500v.pod */; };
+		566849FD153CC89D00D0DF05 /* dinosaur1000v.pod in Resources */ = {isa = PBXBuildFile; fileRef = 566849FC153CC89D00D0DF05 /* dinosaur1000v.pod */; };
+		566849FF153CC8E100D0DF05 /* dinosaur500v.pod in Resources */ = {isa = PBXBuildFile; fileRef = 566849FE153CC8E100D0DF05 /* dinosaur500v.pod */; };
+		56684A01153CC92500D0DF05 /* dinosaur100v.pod in Resources */ = {isa = PBXBuildFile; fileRef = 56684A00153CC92500D0DF05 /* dinosaur100v.pod */; };
+		56684A03153CCEC000D0DF05 /* bunny-35947v.pod in Resources */ = {isa = PBXBuildFile; fileRef = 56684A02153CCEC000D0DF05 /* bunny-35947v.pod */; };
+		56684A05153CD0F400D0DF05 /* bunny-5000v.pod in Resources */ = {isa = PBXBuildFile; fileRef = 56684A04153CD0F400D0DF05 /* bunny-5000v.pod */; };
+		56684A07153CD1CA00D0DF05 /* bunny-30000v.pod in Resources */ = {isa = PBXBuildFile; fileRef = 56684A06153CD1CA00D0DF05 /* bunny-30000v.pod */; };
+		56684A09153CD28400D0DF05 /* bunny-20000v.pod in Resources */ = {isa = PBXBuildFile; fileRef = 56684A08153CD28400D0DF05 /* bunny-20000v.pod */; };
+		56684A0B153CD2E900D0DF05 /* bunny-10000v.pod in Resources */ = {isa = PBXBuildFile; fileRef = 56684A0A153CD2E900D0DF05 /* bunny-10000v.pod */; };
+		56684A0D153CD35400D0DF05 /* bunny-4000v.pod in Resources */ = {isa = PBXBuildFile; fileRef = 56684A0C153CD35400D0DF05 /* bunny-4000v.pod */; };
+		56684A0F153CD3A300D0DF05 /* bunny-3500v.pod in Resources */ = {isa = PBXBuildFile; fileRef = 56684A0E153CD3A300D0DF05 /* bunny-3500v.pod */; };
+		56684A11153CD3E400D0DF05 /* bunny-3000v.pod in Resources */ = {isa = PBXBuildFile; fileRef = 56684A10153CD3E400D0DF05 /* bunny-3000v.pod */; };
+		56684A13153CD42B00D0DF05 /* bunny-2500v.pod in Resources */ = {isa = PBXBuildFile; fileRef = 56684A12153CD42B00D0DF05 /* bunny-2500v.pod */; };
+		56684A15153CD46700D0DF05 /* bunny-2000v.pod in Resources */ = {isa = PBXBuildFile; fileRef = 56684A14153CD46700D0DF05 /* bunny-2000v.pod */; };
+		56684A17153CD49F00D0DF05 /* bunny-1500v.pod in Resources */ = {isa = PBXBuildFile; fileRef = 56684A16153CD49F00D0DF05 /* bunny-1500v.pod */; };
+		56684A19153CD4D800D0DF05 /* bunny-1000v.pod in Resources */ = {isa = PBXBuildFile; fileRef = 56684A18153CD4D800D0DF05 /* bunny-1000v.pod */; };
+		56684A1B153CD50E00D0DF05 /* bunny-500v.pod in Resources */ = {isa = PBXBuildFile; fileRef = 56684A1A153CD50E00D0DF05 /* bunny-500v.pod */; };
+		56684A1D153CD54500D0DF05 /* bunny-100v.pod in Resources */ = {isa = PBXBuildFile; fileRef = 56684A1C153CD54500D0DF05 /* bunny-100v.pod */; };
+		56684A1F153CD66400D0DF05 /* bunny-4500v.pod in Resources */ = {isa = PBXBuildFile; fileRef = 56684A1E153CD66400D0DF05 /* bunny-4500v.pod */; };
 		567AAB86151667C000AB26D8 /* arial16.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 567AAB84151667C000AB26D8 /* arial16.fnt */; };
 		567AAB87151667C000AB26D8 /* arial16.png in Resources */ = {isa = PBXBuildFile; fileRef = 567AAB85151667C000AB26D8 /* arial16.png */; };
 		56B6555415150C3D00CE1B49 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56B6555315150C3D00CE1B49 /* QuartzCore.framework */; };
@@ -209,14 +234,8 @@
 		56B657AD15150C4300CE1B49 /* Cmput3DLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B657AC15150C4300CE1B49 /* Cmput3DLayer.m */; };
 		56B657B015150C4300CE1B49 /* Cmput3DWorld.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B657AF15150C4300CE1B49 /* Cmput3DWorld.m */; };
 		56B657BA15150E2E00CE1B49 /* Cmput3DMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B657B915150E2E00CE1B49 /* Cmput3DMenuLayer.m */; };
-		56B657D11515187100CE1B49 /* circle_Label_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 56B657CF1515187100CE1B49 /* circle_Label_selected.png */; };
-		56B657D21515187100CE1B49 /* circle_Label.png in Resources */ = {isa = PBXBuildFile; fileRef = 56B657D01515187100CE1B49 /* circle_Label.png */; };
 		56B657D91515201800CE1B49 /* back_Label_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 56B657D31515201800CE1B49 /* back_Label_selected.png */; };
 		56B657DA1515201800CE1B49 /* back_Label.png in Resources */ = {isa = PBXBuildFile; fileRef = 56B657D41515201800CE1B49 /* back_Label.png */; };
-		56B657DB1515201800CE1B49 /* complex_Label_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 56B657D51515201800CE1B49 /* complex_Label_selected.png */; };
-		56B657DC1515201800CE1B49 /* complex_Label.png in Resources */ = {isa = PBXBuildFile; fileRef = 56B657D61515201800CE1B49 /* complex_Label.png */; };
-		56B657DD1515201800CE1B49 /* square_Label_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 56B657D71515201800CE1B49 /* square_Label_selected.png */; };
-		56B657DE1515201800CE1B49 /* square_Label.png in Resources */ = {isa = PBXBuildFile; fileRef = 56B657D81515201800CE1B49 /* square_Label.png */; };
 		56B657E01515360700CE1B49 /* Balls.pod in Resources */ = {isa = PBXBuildFile; fileRef = 56B657DF1515360500CE1B49 /* Balls.pod */; };
 		56B657E21515385100CE1B49 /* DieCube.pod in Resources */ = {isa = PBXBuildFile; fileRef = 56B657E11515384F00CE1B49 /* DieCube.pod */; };
 		56B657F51515532100CE1B49 /* CCNodeAdornments.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B657F01515532100CE1B49 /* CCNodeAdornments.m */; };
@@ -225,9 +244,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		560B9483153D4F2900E4579C /* buddha-2983v.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "buddha-2983v.pod"; path = "Resources/buddha-2983v.pod"; sourceTree = "<group>"; };
 		5617F1F01518EE9B0031F2AD /* ZoomButton48x48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ZoomButton48x48.png; path = Resources/ZoomButton48x48.png; sourceTree = "<group>"; };
-		566849D2153A409B00D0DF05 /* buddha-2983v.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "buddha-2983v.pod"; path = "Resources/buddha-2983v.pod"; sourceTree = "<group>"; };
-		566849D4153A41A100D0DF05 /* buddha-2983v.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "buddha-2983v.pod"; path = "Resources/buddha-2983v.pod"; sourceTree = "<group>"; };
 		566849D6153A479800D0DF05 /* buddha-2983v-298.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "buddha-2983v-298.pod"; path = "Resources/buddha-2983v-298.pod"; sourceTree = "<group>"; };
 		566849D8153A486000D0DF05 /* buddha-2983v-571.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "buddha-2983v-571.pod"; path = "Resources/buddha-2983v-571.pod"; sourceTree = "<group>"; };
 		566849DA153A48EE00D0DF05 /* buddha-2983v-894.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "buddha-2983v-894.pod"; path = "Resources/buddha-2983v-894.pod"; sourceTree = "<group>"; };
@@ -238,6 +256,31 @@
 		566849E4153A4A9000D0DF05 /* buddha-2983v-2384.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "buddha-2983v-2384.pod"; path = "Resources/buddha-2983v-2384.pod"; sourceTree = "<group>"; };
 		566849E6153A4ADD00D0DF05 /* buddha-2983v-2682.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "buddha-2983v-2682.pod"; path = "Resources/buddha-2983v-2682.pod"; sourceTree = "<group>"; };
 		566849E8153A4B2900D0DF05 /* buddha-2983v-2903.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "buddha-2983v-2903.pod"; path = "Resources/buddha-2983v-2903.pod"; sourceTree = "<group>"; };
+		566849EE153CB28A00D0DF05 /* dinosaur5000v.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = dinosaur5000v.pod; path = Resources/dinosaur5000v.pod; sourceTree = "<group>"; };
+		566849F0153CC6CF00D0DF05 /* dinosaur4000v.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = dinosaur4000v.pod; path = Resources/dinosaur4000v.pod; sourceTree = "<group>"; };
+		566849F2153CC72300D0DF05 /* dinosaur3500v.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = dinosaur3500v.pod; path = Resources/dinosaur3500v.pod; sourceTree = "<group>"; };
+		566849F4153CC77000D0DF05 /* dinosaur3000v.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = dinosaur3000v.pod; path = Resources/dinosaur3000v.pod; sourceTree = "<group>"; };
+		566849F6153CC7B800D0DF05 /* dinosaur2500v.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = dinosaur2500v.pod; path = Resources/dinosaur2500v.pod; sourceTree = "<group>"; };
+		566849F8153CC81200D0DF05 /* dinosaur2000v.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = dinosaur2000v.pod; path = Resources/dinosaur2000v.pod; sourceTree = "<group>"; };
+		566849FA153CC85800D0DF05 /* dinosaur1500v.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = dinosaur1500v.pod; path = Resources/dinosaur1500v.pod; sourceTree = "<group>"; };
+		566849FC153CC89D00D0DF05 /* dinosaur1000v.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = dinosaur1000v.pod; path = Resources/dinosaur1000v.pod; sourceTree = "<group>"; };
+		566849FE153CC8E100D0DF05 /* dinosaur500v.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = dinosaur500v.pod; path = Resources/dinosaur500v.pod; sourceTree = "<group>"; };
+		56684A00153CC92500D0DF05 /* dinosaur100v.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = dinosaur100v.pod; path = Resources/dinosaur100v.pod; sourceTree = "<group>"; };
+		56684A02153CCEC000D0DF05 /* bunny-35947v.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "bunny-35947v.pod"; path = "Resources/bunny-35947v.pod"; sourceTree = "<group>"; };
+		56684A04153CD0F400D0DF05 /* bunny-5000v.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "bunny-5000v.pod"; path = "Resources/bunny-5000v.pod"; sourceTree = "<group>"; };
+		56684A06153CD1CA00D0DF05 /* bunny-30000v.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "bunny-30000v.pod"; path = "Resources/bunny-30000v.pod"; sourceTree = "<group>"; };
+		56684A08153CD28400D0DF05 /* bunny-20000v.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "bunny-20000v.pod"; path = "Resources/bunny-20000v.pod"; sourceTree = "<group>"; };
+		56684A0A153CD2E900D0DF05 /* bunny-10000v.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "bunny-10000v.pod"; path = "Resources/bunny-10000v.pod"; sourceTree = "<group>"; };
+		56684A0C153CD35400D0DF05 /* bunny-4000v.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "bunny-4000v.pod"; path = "Resources/bunny-4000v.pod"; sourceTree = "<group>"; };
+		56684A0E153CD3A300D0DF05 /* bunny-3500v.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "bunny-3500v.pod"; path = "Resources/bunny-3500v.pod"; sourceTree = "<group>"; };
+		56684A10153CD3E400D0DF05 /* bunny-3000v.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "bunny-3000v.pod"; path = "Resources/bunny-3000v.pod"; sourceTree = "<group>"; };
+		56684A12153CD42B00D0DF05 /* bunny-2500v.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "bunny-2500v.pod"; path = "Resources/bunny-2500v.pod"; sourceTree = "<group>"; };
+		56684A14153CD46700D0DF05 /* bunny-2000v.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "bunny-2000v.pod"; path = "Resources/bunny-2000v.pod"; sourceTree = "<group>"; };
+		56684A16153CD49F00D0DF05 /* bunny-1500v.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "bunny-1500v.pod"; path = "Resources/bunny-1500v.pod"; sourceTree = "<group>"; };
+		56684A18153CD4D800D0DF05 /* bunny-1000v.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "bunny-1000v.pod"; path = "Resources/bunny-1000v.pod"; sourceTree = "<group>"; };
+		56684A1A153CD50E00D0DF05 /* bunny-500v.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "bunny-500v.pod"; path = "Resources/bunny-500v.pod"; sourceTree = "<group>"; };
+		56684A1C153CD54500D0DF05 /* bunny-100v.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "bunny-100v.pod"; path = "Resources/bunny-100v.pod"; sourceTree = "<group>"; };
+		56684A1E153CD66400D0DF05 /* bunny-4500v.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "bunny-4500v.pod"; path = "Resources/bunny-4500v.pod"; sourceTree = "<group>"; };
 		567AAB84151667C000AB26D8 /* arial16.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = arial16.fnt; path = Resources/arial16.fnt; sourceTree = "<group>"; };
 		567AAB85151667C000AB26D8 /* arial16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arial16.png; path = Resources/arial16.png; sourceTree = "<group>"; };
 		56B6554F15150C3D00CE1B49 /* Cmput3D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cmput3D.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -629,14 +672,8 @@
 		56B657AF15150C4300CE1B49 /* Cmput3DWorld.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = Cmput3DWorld.m; path = Classes/Cmput3DWorld.m; sourceTree = "<group>"; };
 		56B657B815150E2D00CE1B49 /* Cmput3DMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cmput3DMenuLayer.h; sourceTree = "<group>"; };
 		56B657B915150E2E00CE1B49 /* Cmput3DMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cmput3DMenuLayer.m; sourceTree = "<group>"; };
-		56B657CF1515187100CE1B49 /* circle_Label_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = circle_Label_selected.png; path = Resources/circle_Label_selected.png; sourceTree = "<group>"; };
-		56B657D01515187100CE1B49 /* circle_Label.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = circle_Label.png; path = Resources/circle_Label.png; sourceTree = "<group>"; };
 		56B657D31515201800CE1B49 /* back_Label_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = back_Label_selected.png; path = Resources/back_Label_selected.png; sourceTree = "<group>"; };
 		56B657D41515201800CE1B49 /* back_Label.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = back_Label.png; path = Resources/back_Label.png; sourceTree = "<group>"; };
-		56B657D51515201800CE1B49 /* complex_Label_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = complex_Label_selected.png; path = Resources/complex_Label_selected.png; sourceTree = "<group>"; };
-		56B657D61515201800CE1B49 /* complex_Label.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = complex_Label.png; path = Resources/complex_Label.png; sourceTree = "<group>"; };
-		56B657D71515201800CE1B49 /* square_Label_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = square_Label_selected.png; path = Resources/square_Label_selected.png; sourceTree = "<group>"; };
-		56B657D81515201800CE1B49 /* square_Label.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = square_Label.png; path = Resources/square_Label.png; sourceTree = "<group>"; };
 		56B657DF1515360500CE1B49 /* Balls.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = Balls.pod; path = Resources/Balls.pod; sourceTree = "<group>"; };
 		56B657E11515384F00CE1B49 /* DieCube.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = DieCube.pod; path = Resources/DieCube.pod; sourceTree = "<group>"; };
 		56B657EF1515532100CE1B49 /* CCNodeAdornments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNodeAdornments.h; sourceTree = "<group>"; };
@@ -933,6 +970,7 @@
 				567AAB84151667C000AB26D8 /* arial16.fnt */,
 				567AAB85151667C000AB26D8 /* arial16.png */,
 				56B657DF1515360500CE1B49 /* Balls.pod */,
+				560B9483153D4F2900E4579C /* buddha-2983v.pod */,
 				566849E0153A49E900D0DF05 /* buddha-2983v-1788.pod */,
 				566849E8153A4B2900D0DF05 /* buddha-2983v-2903.pod */,
 				566849E6153A4ADD00D0DF05 /* buddha-2983v-2682.pod */,
@@ -943,17 +981,34 @@
 				566849DC153A494200D0DF05 /* buddha-2983v-1192.pod */,
 				566849D8153A486000D0DF05 /* buddha-2983v-571.pod */,
 				566849D6153A479800D0DF05 /* buddha-2983v-298.pod */,
-				566849D4153A41A100D0DF05 /* buddha-2983v.pod */,
+				56684A00153CC92500D0DF05 /* dinosaur100v.pod */,
+				566849FE153CC8E100D0DF05 /* dinosaur500v.pod */,
+				566849FC153CC89D00D0DF05 /* dinosaur1000v.pod */,
+				566849FA153CC85800D0DF05 /* dinosaur1500v.pod */,
+				566849F8153CC81200D0DF05 /* dinosaur2000v.pod */,
+				566849F6153CC7B800D0DF05 /* dinosaur2500v.pod */,
+				566849F4153CC77000D0DF05 /* dinosaur3000v.pod */,
+				566849F2153CC72300D0DF05 /* dinosaur3500v.pod */,
+				566849F0153CC6CF00D0DF05 /* dinosaur4000v.pod */,
+				566849EE153CB28A00D0DF05 /* dinosaur5000v.pod */,
+				56684A1C153CD54500D0DF05 /* bunny-100v.pod */,
+				56684A1A153CD50E00D0DF05 /* bunny-500v.pod */,
+				56684A18153CD4D800D0DF05 /* bunny-1000v.pod */,
+				56684A16153CD49F00D0DF05 /* bunny-1500v.pod */,
+				56684A14153CD46700D0DF05 /* bunny-2000v.pod */,
+				56684A12153CD42B00D0DF05 /* bunny-2500v.pod */,
+				56684A10153CD3E400D0DF05 /* bunny-3000v.pod */,
+				56684A0E153CD3A300D0DF05 /* bunny-3500v.pod */,
+				56684A0C153CD35400D0DF05 /* bunny-4000v.pod */,
+				56684A1E153CD66400D0DF05 /* bunny-4500v.pod */,
+				56684A04153CD0F400D0DF05 /* bunny-5000v.pod */,
+				56684A0A153CD2E900D0DF05 /* bunny-10000v.pod */,
+				56684A08153CD28400D0DF05 /* bunny-20000v.pod */,
+				56684A06153CD1CA00D0DF05 /* bunny-30000v.pod */,
+				56684A02153CCEC000D0DF05 /* bunny-35947v.pod */,
 				5617F1F01518EE9B0031F2AD /* ZoomButton48x48.png */,
 				56B657D41515201800CE1B49 /* back_Label.png */,
-				566849D4153A41A100D0DF05 /* buddha-2983v.pod */,
 				56B657E11515384F00CE1B49 /* DieCube.pod */,
-				56B657D51515201800CE1B49 /* complex_Label_selected.png */,
-				56B657D61515201800CE1B49 /* complex_Label.png */,
-				56B657D71515201800CE1B49 /* square_Label_selected.png */,
-				56B657D81515201800CE1B49 /* square_Label.png */,
-				56B657CF1515187100CE1B49 /* circle_Label_selected.png */,
-				56B657D01515187100CE1B49 /* circle_Label.png */,
 				56B6565815150C4000CE1B49 /* fps_images.png */,
 				56B6565615150C4000CE1B49 /* Default.png */,
 				56B6565A15150C4000CE1B49 /* Icon-72.png */,
@@ -1368,20 +1423,13 @@
 				56B6566315150C4000CE1B49 /* Icon.png in Resources */,
 				56B6566515150C4000CE1B49 /* Icon@2x.png in Resources */,
 				56B6566815150C4000CE1B49 /* iTunesArtwork in Resources */,
-				56B657D11515187100CE1B49 /* circle_Label_selected.png in Resources */,
-				56B657D21515187100CE1B49 /* circle_Label.png in Resources */,
 				56B657D91515201800CE1B49 /* back_Label_selected.png in Resources */,
 				56B657DA1515201800CE1B49 /* back_Label.png in Resources */,
-				56B657DB1515201800CE1B49 /* complex_Label_selected.png in Resources */,
-				56B657DC1515201800CE1B49 /* complex_Label.png in Resources */,
-				56B657DD1515201800CE1B49 /* square_Label_selected.png in Resources */,
-				56B657DE1515201800CE1B49 /* square_Label.png in Resources */,
 				56B657E01515360700CE1B49 /* Balls.pod in Resources */,
 				56B657E21515385100CE1B49 /* DieCube.pod in Resources */,
 				567AAB86151667C000AB26D8 /* arial16.fnt in Resources */,
 				567AAB87151667C000AB26D8 /* arial16.png in Resources */,
 				5617F1F11518EE9B0031F2AD /* ZoomButton48x48.png in Resources */,
-				566849D3153A409C00D0DF05 /* buddha-2983v.pod in Resources */,
 				566849D7153A479800D0DF05 /* buddha-2983v-298.pod in Resources */,
 				566849D9153A486000D0DF05 /* buddha-2983v-571.pod in Resources */,
 				566849DB153A48EE00D0DF05 /* buddha-2983v-894.pod in Resources */,
@@ -1392,6 +1440,32 @@
 				566849E5153A4A9000D0DF05 /* buddha-2983v-2384.pod in Resources */,
 				566849E7153A4ADD00D0DF05 /* buddha-2983v-2682.pod in Resources */,
 				566849E9153A4B2900D0DF05 /* buddha-2983v-2903.pod in Resources */,
+				566849EF153CB28A00D0DF05 /* dinosaur5000v.pod in Resources */,
+				566849F1153CC6CF00D0DF05 /* dinosaur4000v.pod in Resources */,
+				566849F3153CC72300D0DF05 /* dinosaur3500v.pod in Resources */,
+				566849F5153CC77100D0DF05 /* dinosaur3000v.pod in Resources */,
+				566849F7153CC7B800D0DF05 /* dinosaur2500v.pod in Resources */,
+				566849F9153CC81200D0DF05 /* dinosaur2000v.pod in Resources */,
+				566849FB153CC85800D0DF05 /* dinosaur1500v.pod in Resources */,
+				566849FD153CC89D00D0DF05 /* dinosaur1000v.pod in Resources */,
+				566849FF153CC8E100D0DF05 /* dinosaur500v.pod in Resources */,
+				56684A01153CC92500D0DF05 /* dinosaur100v.pod in Resources */,
+				56684A03153CCEC000D0DF05 /* bunny-35947v.pod in Resources */,
+				56684A05153CD0F400D0DF05 /* bunny-5000v.pod in Resources */,
+				56684A07153CD1CA00D0DF05 /* bunny-30000v.pod in Resources */,
+				56684A09153CD28400D0DF05 /* bunny-20000v.pod in Resources */,
+				56684A0B153CD2E900D0DF05 /* bunny-10000v.pod in Resources */,
+				56684A0D153CD35400D0DF05 /* bunny-4000v.pod in Resources */,
+				56684A0F153CD3A300D0DF05 /* bunny-3500v.pod in Resources */,
+				56684A11153CD3E400D0DF05 /* bunny-3000v.pod in Resources */,
+				56684A13153CD42B00D0DF05 /* bunny-2500v.pod in Resources */,
+				56684A15153CD46700D0DF05 /* bunny-2000v.pod in Resources */,
+				56684A17153CD49F00D0DF05 /* bunny-1500v.pod in Resources */,
+				56684A19153CD4D800D0DF05 /* bunny-1000v.pod in Resources */,
+				56684A1B153CD50E00D0DF05 /* bunny-500v.pod in Resources */,
+				56684A1D153CD54500D0DF05 /* bunny-100v.pod in Resources */,
+				56684A1F153CD66400D0DF05 /* bunny-4500v.pod in Resources */,
+				560B9484153D4F2900E4579C /* buddha-2983v.pod in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

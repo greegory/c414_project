@@ -26,6 +26,9 @@
     origCamTarget = nil;
     selectedNode = nil;
     
+    leftNode = nil;
+    rightNode = nil;
+    
     [templateNodes release];
     [simpleNodes release];
     [selectionTracker release];
@@ -50,8 +53,7 @@
         
         firstGuess = NO;
         secondGuess = NO;
-        wrongGuess = NO;
-        LODidx = arc4random() % 9;        
+        wrongGuess = NO;     
     }
     return self;
 }
@@ -63,50 +65,52 @@
 	CC3ResourceNode* rezNode;
     
     templateNodes = [[NSMutableArray array] retain];
-    simpleNodes = [[NSMutableArray array] retain];
     
-    // Ball models from POD resource.
-	rezNode = [CC3PODResourceNode nodeFromResourceFile: kBallsFileName];
+    // POD resource for Full complexity Bunny
+	rezNode = [CC3PODResourceNode nodeFromResourceFile: kBunnyPODFile3];
 	
-	// Beachball with no texture, but with several subnodes
-	mn = (CC3MeshNode*)[rezNode getNodeNamed: kBeachBallName];
+	mn = (CC3MeshNode*) [rezNode getNodeNamed: kBunnyName3];
 	[mn remove];		// Remove from the POD resource
-	mn.isOpaque = YES;
 	mn.isTouchEnabled = YES;
 	[templateNodes addObject: mn];
     
-//	// Make a simple box template available. Only 6 faces per node.
-//	mn = [CC3BoxNode nodeWithName: kBoxName];
-//	CC3BoundingBox bBox;
-//	bBox.minimum = cc3v(-1.0, -1.0, -1.0);
-//	bBox.maximum = cc3v( 1.0,  1.0,  1.0);
-//	[mn populateAsSolidBox: bBox];
-//	mn.material = [CC3Material material];
-//	mn.isTouchEnabled = YES;
-//	//mn.shouldColorTile = YES;
-//	[templateNodes addObject: mn];
-    
-    //Add the Full complexity buddha
+    // Add the Full complexity buddha
     rezNode = [CC3PODResourceNode nodeFromResourceFile:kBuddhaPODFile0];
+    
     mn = (CC3MeshNode*) [rezNode getNodeNamed:kBuddhaName0];
     [mn remove];
     mn.isTouchEnabled = YES;
     [templateNodes addObject:mn];
 	
-	// Die cube model from POD resource.
-	rezNode = [CC3PODResourceNode nodeFromResourceFile: kDieCubePODFile];
-	mn = (CC3MeshNode*)[rezNode getNodeNamed: kDieCubeName];
+	// POD resource for Full complexity Dinosaur
+	rezNode = [CC3PODResourceNode nodeFromResourceFile: kDinoPODFile0];
+	
+    mn = (CC3MeshNode*)[rezNode getNodeNamed: kDinoName0];
 	[mn remove];		// Remove from the POD resource
 	mn.isTouchEnabled = YES;
 	[templateNodes addObject: mn];
 	
-    NSLog(@"DONE");
+    
+    //	// Make a simple box template available. Only 6 faces per node.
+    //	mn = [CC3BoxNode nodeWithName: kBoxName];
+    //	CC3BoundingBox bBox;
+    //	bBox.minimum = cc3v(-1.0, -1.0, -1.0);
+    //	bBox.maximum = cc3v( 1.0,  1.0,  1.0);
+    //	[mn populateAsSolidBox: bBox];
+    //	mn.material = [CC3Material material];
+    //	mn.isTouchEnabled = YES;
+    //	//mn.shouldColorTile = YES;
+    //	[templateNodes addObject: mn];
+    
+    NSLog(@"DONE Loading templates");
     NSLog(@"%d", [templateNodes count]);
 }
 
 -(void) initSimpleNodeArray: (NSString *) kname{
     
-    if (kname == kBunnyName0)
+    simpleNodes = [[NSMutableArray array] retain];
+    
+    if (kname == kBunnyName3)
         [self initWithBunny];
     
     else if (kname == kBuddhaName0)
@@ -115,6 +119,9 @@
     else if (kname == kDinoName0)
         [self initWithDinosaur];
     
+    
+    //set the LODidx randomly within the number of available 3d meshes
+    LODidx = arc4random() % [simpleNodes count];   
 }
 
 
@@ -129,8 +136,6 @@
     [self initializeTemplates];
     
     [self addCamera];
-    
-//	[self addContentFromPODResourceFile: @"DieCube.pod"] ;
 	
     self.drawingSequencer = [CC3NodeArraySequencer sequencerWithEvaluator: [CC3LocalContentNodeAcceptor evaluator]];
 	self.drawingSequencer.allowSequenceUpdates = NO;
@@ -139,10 +144,6 @@
 	// and to save memory, release the vertex data in main memory because it is now redundant.
 	[self createGLBuffers];
 	[self releaseRedundantData];
-    
-	// Displays bounding boxes around all nodes. The bounding box for each node
-	// will encompass its child nodes.
-//	self.shouldDrawAllWireframeBoxes = NO;
 	
 	LogDebug(@"The structure of this world is: %@", [self structureDescription]);
 	
@@ -180,50 +181,20 @@
 -(void)setSelectedObject:(uint) idx{
     
     if (idx == 0)
-        currentNodeName = kBunnyName0;
+        currentNodeName = kBunnyName3;
     else if (idx == 1)
         currentNodeName = kBuddhaName0;
     else
         currentNodeName = kDinoName0;
     
     currentNodeIdx = idx;
-    currentNode = (CC3Node*)[templateNodes objectAtIndex:currentNodeIdx];
+    currentNode = [(CC3Node*)[templateNodes objectAtIndex:currentNodeIdx] copyAutoreleased];
     
     [self initSimpleNodeArray: currentNodeName];
     
     [self nextRound];
 }
 
-
--(void)increaseNodeByOne: (CGPoint) touchpoint{
-
-    //This makes a random place for when the PLUS button is used
-    if (touchpoint.x == 0){
-        touchpoint = CGPointMake(arc4random()%320, arc4random()%480);
-    }
-    
-    //Ensures that the objects to not overlap the menus
-    if (touchpoint.y < windowSize.height-260)
-        touchpoint.y = 80;
-    else if (touchpoint.y > windowSize.height-60)
-        touchpoint.y = 400;
-    
-    CC3Node *aNode = [currentNode copyAutoreleased];
-    aNode.location = cc3v(touchpoint.x, touchpoint.y, depth);
-    aNode.uniformScale *= 40;
-    aNode.isTouchEnabled = YES;
-    
-    CCActionInterval* partialRot = [CC3RotateBy actionWithDuration: 1.0
-    														  rotateBy: cc3v(0.0, 30.0, 0.0)];
-    [aNode runAction: [CCRepeatForever actionWithAction: partialRot]];
-    
-    [self addChild:aNode];
-    
-    [self createGLBuffers];			// Copy vertex data to OpenGL VBO's.
-	[self releaseRedundantData];	// Release vertex data from main memory.
-   
-    //NSLog(@"%d",  [[self children] count]);
-}
 
 -(void) nextRound{
     
@@ -241,16 +212,16 @@
     
         [self removeAllChildren];
 
-        CGFloat baseNode, simpleNode;
+        CGFloat baseNodeOffset, simpleNodeOffset;
         
         int i = random()%10;
         if (i%2 == 0){
-            baseNode = SET_LEFT;
-            simpleNode = SET_RIGHT;
+            baseNodeOffset = SET_LEFT;
+            simpleNodeOffset = SET_RIGHT;
         }
         else {
-            baseNode = SET_RIGHT;
-            simpleNode = SET_LEFT;
+            baseNodeOffset = SET_RIGHT;
+            simpleNodeOffset = SET_LEFT;
         }
         
         if (secondGuess){
@@ -272,14 +243,14 @@
         
         CC3Node *aNode = [currentNode copyAutoreleased];
         
-        aNode.location = cc3v(windowSize.width*baseNode, windowSize.height/2, depth);
+        aNode.location = cc3v(windowSize.width*baseNodeOffset, windowSize.height/2, depth);
         aNode.uniformScale *= OBJECT_SCALE;
         aNode.isTouchEnabled = YES;
         aNode.tag = BASE_OBJECT;
         
         CC3Node *aNode2 = [(CC3Node*)[simpleNodes objectAtIndex: LODidx] copyAutoreleased];
         
-        aNode2.location = cc3v(windowSize.width*simpleNode, windowSize.height/2, depth);
+        aNode2.location = cc3v(windowSize.width*simpleNodeOffset, windowSize.height/2, depth);
         aNode2.uniformScale *= OBJECT_SCALE;
         aNode2.isTouchEnabled = YES;
         aNode2.tag = SIMPLE_OBJECT;
@@ -292,9 +263,10 @@
 //        [aNode runAction: [CCRepeatForever actionWithAction: partialRot]];
 //        [aNode2 runAction: [CCRepeatForever actionWithAction: partialRot2]];
 //        
-        [self addChild:aNode];
+        [self addChild:aNode] ;
         [self addChild:aNode2];    
         [self addLamp];
+        
     }
 }
 
@@ -341,14 +313,19 @@
 	GLfloat angle = ccpLength(swipe2d) * kSwipeScale;
 
 	for (CC3Node* node in children) {
-        if (node == selectedNode)
+        if (node == selectedNode){
+//            CCActionInterval* partialRot = [CC3RotateBy actionWithDuration: 1.0
+//                                                        rotateBy: cc3v(0.0,30,0.0)];   
+//            [node runAction: [CCRepeatForever actionWithAction: partialRot]];
             [node rotateByAngle: angle aroundAxis: axis];
+            
+        }
     }
     
 }
 
 
-//will get called based on teh touchEvent method by calling
+// will get called based on teh touchEvent method by calling
 // [touchedNodePicker pickNodeFromTouchEvent: touchType at: touchPoint]; 
 // in the touchBegan / touchEnded
 -(void) nodeSelected: (CC3Node*) aNode byTouchEvent: (uint) touchType at: (CGPoint) touchPoint {
@@ -381,7 +358,6 @@
 
         testCount++;
     }
-	
 }
 
 
@@ -393,26 +369,26 @@
     CC3MeshNode* meshNode;
 	CC3ResourceNode* resourceNode;
     
-    resourceNode = [CC3PODResourceNode nodeFromResourceFile:kBunnyPODFile1];
-    
-    meshNode = (CC3MeshNode*)[resourceNode getNodeNamed:kBunnyName1];
-    [meshNode remove];
-    meshNode.isTouchEnabled = YES;
-    [simpleNodes addObject:meshNode];
-    
-    resourceNode = [CC3PODResourceNode nodeFromResourceFile:kBunnyPODFile2];
-    
-    meshNode = (CC3MeshNode*)[resourceNode getNodeNamed:kBunnyName2];
-    [meshNode remove];
-    meshNode.isTouchEnabled = YES;
-    [simpleNodes addObject:meshNode];
-    
-    resourceNode = [CC3PODResourceNode nodeFromResourceFile:kBunnyPODFile3];
-    
-    meshNode = (CC3MeshNode*)[resourceNode getNodeNamed:kBunnyName3];
-    [meshNode remove];
-    meshNode.isTouchEnabled = YES;
-    [simpleNodes addObject:meshNode];
+//    resourceNode = [CC3PODResourceNode nodeFromResourceFile:kBunnyPODFile1];
+//    
+//    meshNode = (CC3MeshNode*)[resourceNode getNodeNamed:kBunnyName1];
+//    [meshNode remove];
+//    meshNode.isTouchEnabled = YES;
+//    [simpleNodes addObject:meshNode];
+//    
+//    resourceNode = [CC3PODResourceNode nodeFromResourceFile:kBunnyPODFile2];
+//    
+//    meshNode = (CC3MeshNode*)[resourceNode getNodeNamed:kBunnyName2];
+//    [meshNode remove];
+//    meshNode.isTouchEnabled = YES;
+//    [simpleNodes addObject:meshNode];
+//    
+//    resourceNode = [CC3PODResourceNode nodeFromResourceFile:kBunnyPODFile3];
+//    
+//    meshNode = (CC3MeshNode*)[resourceNode getNodeNamed:kBunnyName3];
+//    [meshNode remove];
+//    meshNode.isTouchEnabled = YES;
+//    [simpleNodes addObject:meshNode];
     
     resourceNode = [CC3PODResourceNode nodeFromResourceFile:kBunnyPODFile4];
     
@@ -640,6 +616,36 @@
     
     
 }
-
+         
+ 
+ -(void)increaseNodeByOne: (CGPoint) touchpoint{
+     
+     //This makes a random place for when the PLUS button is used
+     if (touchpoint.x == 0){
+         touchpoint = CGPointMake(arc4random()%320, arc4random()%480);
+     }
+     
+     //Ensures that the objects to not overlap the menus
+     if (touchpoint.y < windowSize.height-260)
+         touchpoint.y = 80;
+     else if (touchpoint.y > windowSize.height-60)
+         touchpoint.y = 400;
+     
+     CC3Node *aNode = [currentNode copyAutoreleased];
+     aNode.location = cc3v(touchpoint.x, touchpoint.y, depth);
+     aNode.uniformScale *= 40;
+     aNode.isTouchEnabled = YES;
+     
+     CCActionInterval* partialRot = [CC3RotateBy actionWithDuration: 1.0
+                                                           rotateBy: cc3v(0.0, 30.0, 0.0)];
+     [aNode runAction: [CCRepeatForever actionWithAction: partialRot]];
+     
+     [self addChild:aNode];
+     
+     [self createGLBuffers];			// Copy vertex data to OpenGL VBO's.
+     [self releaseRedundantData];	// Release vertex data from main memory.
+     
+     //NSLog(@"%d",  [[self children] count]);
+ }
 @end
 

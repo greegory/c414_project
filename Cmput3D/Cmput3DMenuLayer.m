@@ -143,7 +143,7 @@
 //Menu items
 - (void) worldWithBeachBall: (CCMenuItem  *) menuItem {
     
-    [self worldWith:kBunnyName0];
+    [self worldWith:kBunnyName3];
 	NSLog(@"The Bunny menu was called");
 }
 
