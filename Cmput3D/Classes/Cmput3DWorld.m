@@ -6,8 +6,10 @@
 //  Copyright Greg Jaciuk 2012. All rights reserved.
 //
 
+#import "Cmput3DAppDelegate.h"
 #import "Cmput3DWorld.h"
 #import "Cmput3DMenuLayer.h"
+#import "Cmput3DResultsLayer.h"
 
 @implementation Cmput3DWorld
 
@@ -15,6 +17,7 @@
 @synthesize simpleNodes;
 @synthesize selectionTracker;
 @synthesize depthTracker;
+@synthesize complexityTracker;
 
 -(void) dealloc {
 
@@ -33,6 +36,7 @@
     [simpleNodes release];
     [selectionTracker release];
     [depthTracker release];
+    [complexityTracker release];
 
 	[super dealloc];
 }
@@ -42,6 +46,7 @@
     if ((self = [super init])){
         selectionTracker = [[NSMutableArray arrayWithCapacity: TEST_LENGTH ] retain];
         depthTracker = [[NSMutableArray arrayWithCapacity: TEST_LENGTH ] retain];
+        complexityTracker = [[NSMutableArray arrayWithCapacity: TEST_LENGTH ] retain];
         
         selectedNode = nil;
         
@@ -56,6 +61,8 @@
         firstGuess = NO;
         secondGuess = NO;
         wrongGuess = NO;     
+        
+        [self initializeTemplates];
     }
     return self;
 }
@@ -73,7 +80,6 @@
 	
 	mn = (CC3MeshNode*) [rezNode getNodeNamed: kBunnyName3];
 	[mn remove];		// Remove from the POD resource
-	mn.isTouchEnabled = YES;
 	[templateNodes addObject: mn];
     
     // Add the Full complexity buddha
@@ -81,7 +87,6 @@
     
     mn = (CC3MeshNode*) [rezNode getNodeNamed:kBuddhaName0];
     [mn remove];
-    mn.isTouchEnabled = YES;
     [templateNodes addObject:mn];
 	
 	// POD resource for Full complexity Dinosaur
@@ -89,7 +94,6 @@
 	
     mn = (CC3MeshNode*)[rezNode getNodeNamed: kDinoName0];
 	[mn remove];		// Remove from the POD resource
-	mn.isTouchEnabled = YES;
 	[templateNodes addObject: mn];
 	
     
@@ -104,8 +108,8 @@
     //	//mn.shouldColorTile = YES;
     //	[templateNodes addObject: mn];
     
-    NSLog(@"DONE Loading templates");
-    NSLog(@"%d", [templateNodes count]);
+    LogInfo(@"DONE Loading templates");
+    LogInfo(@"%d", [templateNodes count]);
 }
 
 -(void) initSimpleNodeArray: (NSString *) kname{
@@ -126,6 +130,24 @@
     LODidx = arc4random() % [simpleNodes count];   
 }
 
+-(void)setSelectedObject:(uint) idx{
+    
+    if (idx == 0)
+        currentNodeName = kBunnyName3;
+    else if (idx == 1)
+        currentNodeName = kBuddhaName0;
+    else
+        currentNodeName = kDinoName0;
+    
+    currentNodeIdx = idx;
+    currentNode = [(CC3Node*)[templateNodes objectAtIndex:currentNodeIdx] copyAutoreleased];
+    
+    
+    [self initSimpleNodeArray: currentNodeName];
+    
+    [self nextRound];
+}
+
 
 /**
  * Constructs the 3D world.
@@ -134,8 +156,6 @@
  * from a POD file
 */
 -(void) initializeWorld {
-    
-    [self initializeTemplates];
     
     [self addCamera];
 	
@@ -180,83 +200,61 @@
     
 }
 
--(void)setSelectedObject:(uint) idx{
-    
-    if (idx == 0)
-        currentNodeName = kBunnyName3;
-    else if (idx == 1)
-        currentNodeName = kBuddhaName0;
-    else
-        currentNodeName = kDinoName0;
-    
-    currentNodeIdx = idx;
-    currentNode = [(CC3Node*)[templateNodes objectAtIndex:currentNodeIdx] copyAutoreleased];
-    
-    [self initSimpleNodeArray: currentNodeName];
-    
-    [self nextRound];
-}
-
 -(void) calculateGameLogic: (uint) choice{
     
-//    if (selectedNode != nil){
-//        for (CC3Node* child in children) {
-//            
-//            if (selectedNode == child && selectedNode.tag == BASE_OBJECT){
-//                if (firstGuess) secondGuess = YES;
-//                
-//                [selectionTracker addObject:[NSNumber numberWithInt:CORRECT]];
-//                [depthTracker addObject:[NSNumber numberWithFloat:depth]];
-//                firstGuess = YES;
-//            }
-//            else if (selectedNode.tag == SIMPLE_OBJECT){
-//                [selectionTracker addObject:[NSNumber numberWithInt:INCORRECT]];
-//                [depthTracker addObject:[NSNumber numberWithFloat:depth]];
-//                firstGuess = NO;
-//                secondGuess = NO;
-//                wrongGuess = YES;
-//            }
-//        }
-//        
-//        testCount++;
-//    }
+    NSString *nName = @"";
       
     if (leftNode.tag == BASE_OBJECT && choice == LEFT){
-        if (firstGuess){ secondGuess = YES;NSLog(@"second guess correct");}
+        if (firstGuess){ secondGuess = YES; LogInfo(@"second guess correct");}
+        
+        nName = [leftNode.structureDescription stringByReplacingOccurrencesOfString:@"CC3PODMeshNode " withString:@""];
+        nName = [nName stringByReplacingOccurrencesOfString:@" (POD index: 0)" withString:@""];
         
         [selectionTracker addObject:[NSNumber numberWithInt:CORRECT]];
         [depthTracker addObject:[NSNumber numberWithFloat:depth]];
+        [complexityTracker addObject:nName];
+        
         firstGuess = YES;
-        NSLog(@"First guess correct");
+        LogInfo(@"First guess correct");
     }
     else if (leftNode.tag == SIMPLE_OBJECT && choice == RIGHT){
-        if (firstGuess){ secondGuess = YES;NSLog(@"second guess correct");}
+        if (firstGuess){ secondGuess = YES; LogInfo(@"second guess correct");}
+        
+        nName = [leftNode.structureDescription stringByReplacingOccurrencesOfString:@"CC3PODMeshNode" withString:@""];       
+        nName = [nName stringByReplacingOccurrencesOfString:@" (POD index: 0)" withString:@""];
         
         [selectionTracker addObject:[NSNumber numberWithInt:CORRECT]];
         [depthTracker addObject:[NSNumber numberWithFloat:depth]];
+        [complexityTracker addObject:nName];
+         
         firstGuess = YES;
-        NSLog(@"First guess correct");
+        LogInfo(@"First guess correct");
     }
     else {
+        nName = [rightNode.structureDescription stringByReplacingOccurrencesOfString:@"CC3PODMeshNode" withString:@""];
+        nName = [nName stringByReplacingOccurrencesOfString:@" (POD index: 0)" withString:@""]; 
+        
         [selectionTracker addObject:[NSNumber numberWithInt:INCORRECT]];
         [depthTracker addObject:[NSNumber numberWithFloat:depth]];
+        [complexityTracker addObject:nName];
+        
         firstGuess = NO;
         secondGuess = NO;
         wrongGuess = YES;
-        NSLog(@"First guess wrong");
+        LogInfo(@"First guess wrong");
     }
     
     testCount++;
     
     if (testCount == TEST_LENGTH) {
-        for (NSNumber* num in selectionTracker) {
-            NSLog(@"%d",[num unsignedIntValue]);
-        }
-        for (NSNumber* num in depthTracker) {
-            NSLog(@"%f",[num floatValue]);
-        }
+        
+        Cmput3DResultsLayer *alayer = [[Cmput3DResultsLayer alloc] initWithResults:selectionTracker depth:depthTracker name:complexityTracker];
+        //[alayer initWithResults:selectionTracker depth:depthTracker name:complexityTracker];
+        
+        //[alayer scheduleUpdate];
+            
         [[CCDirector sharedDirector] replaceScene:
-         [CCTransitionFade transitionWithDuration:0.5f scene:[Cmput3DMenuLayer scene]]];
+         [CCTransitionFade transitionWithDuration:0.5f scene:[alayer scene]]];
     }
     else{
         
@@ -265,16 +263,16 @@
             firstGuess = NO;
             secondGuess = NO;
             wrongGuess = NO;
-            if (LODidx < [simpleNodes count]) 
-                LODidx += 1;
+            if (LODidx > 0) 
+                LODidx -= 1;
         }
         else if (wrongGuess){
             depth += depth_change;
             firstGuess = NO;
             secondGuess = NO;
             wrongGuess = NO;
-            if (LODidx > 0) 
-                LODidx -= 1;
+            if (LODidx < [simpleNodes count]-1) 
+                LODidx += 1;
         }
     }
 }
@@ -322,20 +320,22 @@
     [self addChild:aNode2];    
     [self addLamp];
        
+    [self createGLBuffers];
+	[self releaseRedundantData];
 }
 
 -(void) touchEvent: (uint) touchType at: (CGPoint) touchPoint {
     
 	switch (touchType) {
 		case kCCTouchBegan:
-            NSLog(@"Touch Began");
+            LogInfo(@"Touch Began");
 			[touchedNodePicker pickNodeFromTouchEvent: touchType at: touchPoint];
             break;
         case kCCTouchMoved:
             [self rotateMainNodeFromSwipeAt: touchPoint];
             break;
         case kCCTouchEnded:
-            NSLog(@"Touch ended");
+            LogInfo(@"Touch ended");
             //[self nextRound];
             
             //[touchedNodePicker pickNodeFromTouchEvent: touchType at: touchPoint];
@@ -686,7 +686,7 @@
      [self createGLBuffers];			// Copy vertex data to OpenGL VBO's.
      [self releaseRedundantData];	// Release vertex data from main memory.
      
-     //NSLog(@"%d",  [[self children] count]);
+     //LogInfo(@"%d",  [[self children] count]);
  }
 @end
 

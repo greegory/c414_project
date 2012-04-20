@@ -30,7 +30,7 @@ typedef enum {
 //} Rnd;
 
 //game variables
-#define TEST_LENGTH 30
+#define TEST_LENGTH 1
 //#define DEPTH_CHANGE 20
 //#define OBJECT_SCALE 40
 #define BASE_OBJECT 1
@@ -46,13 +46,14 @@ typedef enum {
     NSMutableArray *simpleNodes;
     NSMutableArray *selectionTracker;
     NSMutableArray *depthTracker;
+    NSMutableArray *complexityTracker;
     
     CC3Node *currentNode; //Template node being used i.e. buddha, dragon, bunny
     NSString *currentNodeName; 
     CC3Camera *camera;
     CC3Light *lamp;
-    CC3Node* origCamTarget;
-	CC3Node* camTarget;
+    CC3Node *origCamTarget;
+	CC3Node *camTarget;
     CC3Node *selectedNode; // The last node that was selected by the user touch
     
     CC3Node *leftNode;
@@ -81,6 +82,7 @@ typedef enum {
 @property (nonatomic, retain) NSMutableArray *simpleNodes;
 @property (nonatomic, retain) NSMutableArray *selectionTracker;
 @property (nonatomic, retain) NSMutableArray *depthTracker;
+@property (nonatomic, retain) NSMutableArray *complexityTracker;
 
 
 //Creates an array with some template objects that should be copied and
@@ -95,6 +97,8 @@ typedef enum {
 //this sets the initial object to 1 of 3 objects in the template array
 //this is based on an index that is passed by the menu layer
 -(void)setSelectedObject:(uint) kname;
+
+//the logic of the test is calculated and any adjustments to globals is done
 -(void)calculateGameLogic: (uint) choice;
 -(void)nextRound;
 

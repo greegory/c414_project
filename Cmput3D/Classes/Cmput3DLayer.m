@@ -104,11 +104,11 @@
     [[CCDirector sharedDirector] replaceScene:
         [CCTransitionFade transitionWithDuration:0.5f scene:[Cmput3DMenuLayer scene]]];
     
-    NSLog(@"the back button was selected");
+    LogInfo(@"the back button was selected");
 }
 
 -(void)increaseNodes: (CCMenuItem*) menuItem{
-    NSLog(@"Add Node");
+    LogInfo(@"Add Node");
    //[self.cmputWorld increaseNodeByOne: CGPointMake(0.0, 0.0)];
 }
 
@@ -117,7 +117,7 @@
  */
 -(void)chooseLeft: (CCMenuItem*) menuItem {
     
-    NSLog(@"LEFT CHOICE");
+    LogInfo(@"LEFT CHOICE");
     [self.cmputWorld calculateGameLogic: LEFT];
     [self.cmputWorld nextRound];
 }
@@ -125,7 +125,7 @@
 
 -(void)chooseRight: (CCMenuItem*) menuItem {
     
-    NSLog(@"RIGHT CHOICE");
+    LogInfo(@"RIGHT CHOICE");
     [self.cmputWorld calculateGameLogic: RIGHT];
     [self.cmputWorld nextRound];
 }
@@ -139,7 +139,7 @@
 //    CGPoint location = [self convertTouchToNodeSpace:touch];
 //    
 //    [self.cmputWorld increaseNodeByOne: location];
-//   // NSLog(@"%f, %f",location.x, location.y);
+//   // LogInfo(@"%f, %f",location.x, location.y);
 //        
 //}
 

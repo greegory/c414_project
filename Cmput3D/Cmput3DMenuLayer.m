@@ -7,6 +7,7 @@
 //
 
 #import "Cmput3DMenuLayer.h"
+#import "Cmput3DResultsLayer.h"
 
 @interface Cmput3DMenuLayer (TemplateMethods)
 
@@ -83,6 +84,7 @@
         
 		[self initializeControls];
         [self setUpMenus];
+        
         // register to receive targeted touch events
         [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self
                                                          priority:0
@@ -120,19 +122,16 @@
         idx = 0;
         
     
-    CC3Layer* cc3Layer = [Cmput3DLayer layerWithColor: ccc4(100, 120, 220, 255)];
-	[cc3Layer scheduleUpdate];
+    Cmput3DLayer* myLayer = [Cmput3DLayer layerWithColor: ccc4(100, 120, 220, 255)];
+	[myLayer scheduleUpdate];
 	
-	// Create the customized 3D world, attach it to the layer, and start it playing.
     Cmput3DWorld *cWorld = [Cmput3DWorld world];
     
-	cc3Layer.cc3World = cWorld;
+	myLayer.cc3World = cWorld;
     [cWorld setSelectedObject:idx];
     
-	ControllableCCLayer* mainLayer = cc3Layer;
-    
     CCScene *scene = [CCScene node];
-	[scene addChild: mainLayer];
+	[scene addChild: myLayer];
     
 	[[CCDirector sharedDirector] replaceScene: 
         [CCTransitionFade transitionWithDuration:0.5f scene: scene] ];
@@ -142,19 +141,18 @@
 
 //Menu items
 - (void) worldWithBeachBall: (CCMenuItem  *) menuItem {
-    
+	LogInfo(@"The Bunny menu was called");    
     [self worldWith:kBunnyName3];
-	NSLog(@"The Bunny menu was called");
 }
 
 - (void) worldWithBuddha: (CCMenuItem  *) menuItem {
+	LogInfo(@"The Buddha menu was called");
     [self worldWith:kBuddhaName0];
-	NSLog(@"The Buddha menu was called");
 }
 
 - (void) worldWithDieCube: (CCMenuItem  *) menuItem {
+    LogInfo(@"The Dinosaur menu was called");
     [self worldWith:kDinoName0];
-	NSLog(@"The Dinosaur menu was called");
 }
 
 -(void)dealloc{

@@ -82,36 +82,9 @@
 	// You can change anytime.
 	[CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
 	
-	
-	// ******** START OF COCOS3D SETUP CODE... ********
-	
-	// Create the customized CC3Layer that supports 3D rendering,
-	// and schedule it for automatic updates
-	CC3Layer* cc3Layer = [Cmput3DMenuLayer node];
-	[cc3Layer scheduleUpdate];
-	
-//	// Create the customized 3D world, attach it to the layer, and start it playing.
-//	cc3Layer.cc3World = [Cmput3DWorld world];
-
-	ControllableCCLayer* mainLayer = cc3Layer;
-
-	cc3Layer.shouldAlwaysUpdateViewport = YES;
-	//[cc3Layer runAction: [CCMoveTo actionWithDuration: 10.0 position: ccp(100.0, 200.0)]];
-	
-	// The controller is optional. If you want to auto-rotate the view when the device orientation
-	// changes, or if you want to display a device camera behind a combined 3D & 2D scene
-	// (augmented reality), use a controller. Otherwise you can simply remove the following lines
-	// and uncomment the lines below these lines that uses the traditional CCDirector scene startup.
-	viewController = [[CCNodeController controller] retain];
-	viewController.doesAutoRotate = YES;
-	[viewController runSceneOnNode: mainLayer];		// attach the layer to the controller and run a scene with it
-	
-	// If a controller is NOT used, uncomment the following standard CCDirector scene startup lines,
-	// and remove the lines above that reference viewContoller.
-
-//	CCScene *scene = [CCScene node];
-//	[scene addChild: [Cmput3DMenuLayer scene]];
-//	[[CCDirector sharedDirector] runWithScene: scene];
+    [[CCDirector sharedDirector] setDeviceOrientation:CCDeviceOrientationLandscapeLeft];
+    
+	[[CCDirector sharedDirector] runWithScene: [Cmput3DMenuLayer scene]];
 	
 }
 
