@@ -118,7 +118,7 @@
 -(void)chooseLeft: (CCMenuItem*) menuItem {
     
     LogInfo(@"LEFT CHOICE");
-    [self.cmputWorld calculateGameLogic: LEFT];
+    [self.cmputWorld calculateGameLogic: LEFT_NODE];
     [self.cmputWorld nextRound];
 }
 
@@ -126,7 +126,7 @@
 -(void)chooseRight: (CCMenuItem*) menuItem {
     
     LogInfo(@"RIGHT CHOICE");
-    [self.cmputWorld calculateGameLogic: RIGHT];
+    [self.cmputWorld calculateGameLogic: RIGHT_NODE];
     [self.cmputWorld nextRound];
 }
 

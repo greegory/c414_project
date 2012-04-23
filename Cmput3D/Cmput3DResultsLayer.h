@@ -20,6 +20,9 @@
     CGSize windowSize;    
     
     CCLayer *labelLayer;
+    
+    CGFloat averageDepth;
+    uint correctAnswers, incorrectAnswers;
 }
 
 @property (nonatomic, retain) NSMutableArray *selectionTracker;

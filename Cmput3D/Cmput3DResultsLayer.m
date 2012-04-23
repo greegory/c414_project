@@ -48,6 +48,10 @@
 -(void) initializeControls
 {
     windowSize = (CGSize)[[CCDirector sharedDirector] winSize];        
+
+    averageDepth = 0.0;
+    correctAnswers = 0;
+    incorrectAnswers = 0;
     
     labelLayer = [[CCLayer alloc] init];
     
@@ -109,18 +113,32 @@
 	[CCTexture2D setDefaultAlphaPixelFormat: kCCTexture2DPixelFormat_RGBA4444];
 	
     NSString *sLabel;
-        
+    uint selection = 0;
+    CGFloat objectDepth = 0.0;
+    NSString *complx = @"";
+    
     for (int i = 0; i < TEST_LENGTH; ++i) {
         sLabel = [[NSString alloc] init];
+        
+        complx = [NSString stringWithFormat:@"%@ ", [complexityTracker objectAtIndex:i]];
+        selection = (uint)[selectionTracker objectAtIndex:i];
+        
         //sLabel = [sLabel stringByAppendingString: [NSString stringWithFormat:@"%i.", i]];
-        sLabel = [sLabel stringByAppendingString: [NSString stringWithFormat:@"%@ ", [complexityTracker objectAtIndex:i]]];
-        sLabel = [sLabel stringByAppendingString: [NSString stringWithFormat:@"Answer:%@ ", [selectionTracker objectAtIndex:i]]];
+        sLabel = [sLabel stringByAppendingString: complx];
+        sLabel = [sLabel stringByAppendingString: [NSString stringWithFormat:@"Answer:%@ ", selection]];
         sLabel = [sLabel stringByAppendingString: [NSString stringWithFormat:@"Depth:%@", [depthTracker objectAtIndex:i]]];
-        LogInfo(@"%@", sLabel);
+        
         [(CCLabelBMFont*)[labelLayer getChildByTag:i] setString:sLabel];
         
         [sLabel release];
+        
+        if (selection == 1)
+            correctAnswers += 1;
+        averageDepth += objectDepth;
     }
+    
+    incorrectAnswers = TEST_LENGTH - correctAnswers;
+    averageDepth = averageDepth/TEST_LENGTH;
     
 	[CCTexture2D setDefaultAlphaPixelFormat: currentFormat];
 

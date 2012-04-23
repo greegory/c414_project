@@ -40,6 +40,9 @@ typedef enum {
 #define SET_LEFT .33
 #define SET_RIGHT .66
 
+#define LEFT_NODE                0
+#define RIGHT_NODE               1
+
 @interface Cmput3DWorld : CC3World {
 
     NSMutableArray *templateNodes;

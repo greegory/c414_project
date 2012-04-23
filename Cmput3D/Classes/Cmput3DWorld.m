@@ -202,7 +202,7 @@
     
     NSString *nName = @"";
       
-    if (leftNode.tag == BASE_OBJECT && choice == LEFT){
+    if (leftNode.tag == BASE_OBJECT && choice == LEFT_NODE){
         if (firstGuess){ secondGuess = YES; LogInfo(@"second guess correct");}
         
         nName = [leftNode.structureDescription stringByReplacingOccurrencesOfString:@"CC3PODMeshNode " withString:@""];
@@ -215,10 +215,10 @@
         firstGuess = YES;
         LogInfo(@"First guess correct");
     }
-    else if (leftNode.tag == SIMPLE_OBJECT && choice == RIGHT){
+    else if (leftNode.tag == SIMPLE_OBJECT && choice == RIGHT_NODE){
         if (firstGuess){ secondGuess = YES; LogInfo(@"second guess correct");}
         
-        nName = [leftNode.structureDescription stringByReplacingOccurrencesOfString:@"CC3PODMeshNode" withString:@""];       
+        nName = [rightNode.structureDescription stringByReplacingOccurrencesOfString:@"CC3PODMeshNode" withString:@""];       
         nName = [nName stringByReplacingOccurrencesOfString:@" (POD index: 0)" withString:@""];
         
         [selectionTracker addObject:[NSNumber numberWithInt:CORRECT]];
@@ -228,8 +228,21 @@
         firstGuess = YES;
         LogInfo(@"First guess correct");
     }
-    else {
+    else if (leftNode.tag == BASE_OBJECT && choice == RIGHT_NODE){
         nName = [rightNode.structureDescription stringByReplacingOccurrencesOfString:@"CC3PODMeshNode" withString:@""];
+        nName = [nName stringByReplacingOccurrencesOfString:@" (POD index: 0)" withString:@""]; 
+        
+        [selectionTracker addObject:[NSNumber numberWithInt:INCORRECT]];
+        [depthTracker addObject:[NSNumber numberWithFloat:depth]];
+        [complexityTracker addObject:nName];
+        
+        firstGuess = NO;
+        secondGuess = NO;
+        wrongGuess = YES;
+        LogInfo(@"First guess wrong");
+    }
+    else if (leftNode.tag == SIMPLE_OBJECT && choice == LEFT_NODE){
+        nName = [leftNode.structureDescription stringByReplacingOccurrencesOfString:@"CC3PODMeshNode" withString:@""];
         nName = [nName stringByReplacingOccurrencesOfString:@" (POD index: 0)" withString:@""]; 
         
         [selectionTracker addObject:[NSNumber numberWithInt:INCORRECT]];
