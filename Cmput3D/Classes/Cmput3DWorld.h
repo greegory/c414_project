@@ -30,7 +30,7 @@ typedef enum {
 //} Rnd;
 
 //game variables
-#define TEST_LENGTH 1
+#define TEST_LENGTH 16
 //#define DEPTH_CHANGE 20
 //#define OBJECT_SCALE 40
 #define BASE_OBJECT 1

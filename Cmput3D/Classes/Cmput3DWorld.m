@@ -157,7 +157,7 @@
 */
 -(void) initializeWorld {
     
-    [self addCamera];
+    //[self addCamera];
 	
     self.drawingSequencer = [CC3NodeArraySequencer sequencerWithEvaluator: [CC3LocalContentNodeAcceptor evaluator]];
 	self.drawingSequencer.allowSequenceUpdates = NO;
@@ -176,8 +176,6 @@
     // Camera starts out embedded in the world.
 	cameraZoomType = kCameraZoomNone;
 	
-	// The camera comes from the POD file and is actually animated.
-	// Stop the camera from being animated so the user can control it via the user interface.
 	[self.activeCamera disableAnimation];
 	
 	// Keep track of which object the camera is pointing at
@@ -248,10 +246,10 @@
     
     if (testCount == TEST_LENGTH) {
         
-        Cmput3DResultsLayer *alayer = [[Cmput3DResultsLayer alloc] initWithResults:selectionTracker depth:depthTracker name:complexityTracker];
-        //[alayer initWithResults:selectionTracker depth:depthTracker name:complexityTracker];
+        Cmput3DResultsLayer *alayer = [Cmput3DResultsLayer node];
+        [alayer initWithResults:selectionTracker depth:depthTracker name:complexityTracker];
         
-        //[alayer scheduleUpdate];
+        [alayer scheduleUpdate];
             
         [[CCDirector sharedDirector] replaceScene:
          [CCTransitionFade transitionWithDuration:0.5f scene:[alayer scene]]];
@@ -267,13 +265,15 @@
                 LODidx -= 1;
         }
         else if (wrongGuess){
-            depth += depth_change;
+            if (depth < 100.0)
+                depth += depth_change;
             firstGuess = NO;
             secondGuess = NO;
             wrongGuess = NO;
             if (LODidx < [simpleNodes count]-1) 
                 LODidx += 1;
         }
+        LogInfo(@"%f", depth);
     }
 }
 

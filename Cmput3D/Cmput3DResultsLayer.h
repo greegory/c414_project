@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CC3Layer.h"
+#import "CCLayer.h"
 
 @interface Cmput3DResultsLayer : CC3Layer {
     NSMutableArray *selectionTracker;
@@ -16,22 +17,26 @@
     
     CCMenuItem *menuButton;
     CCMenuItem *resultsButton;
-    CGSize windowSize;
+    CGSize windowSize;    
+    
+    CCLayer *labelLayer;
 }
 
 @property (nonatomic, retain) NSMutableArray *selectionTracker;
 @property (nonatomic, retain) NSMutableArray *depthTracker;
 @property (nonatomic, retain) NSMutableArray *complexityTracker;
 
--(Cmput3DResultsLayer*) initWithResults: (NSMutableArray*) selectionTrack 
+-(void) initWithResults: (NSMutableArray*) selectionTrack 
                                   depth: (NSMutableArray*) depthTrack
                                    name: (NSMutableArray*) complexityTrack;
 -(void)addBackButton;
 -(void)getResultsButton;
--(void)showResults: (CCMenuItem*) menuItem;
+-(void)showResults;
 -(void)backToMenu: (CCMenuItem*) menuItem;
 -(void)results;
--(CCLabelBMFont*) addStatsLabel: (NSString*) labelText;
+-(void)addLabels;
+
+-(CCLabelBMFont*) addStatsLabel: (NSString*) labelText tag: (uint) aTag;
 
 -(CCScene*) scene;
 
