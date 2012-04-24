@@ -30,15 +30,15 @@ typedef enum {
 //} Rnd;
 
 //game variables
-#define TEST_LENGTH 16
-//#define DEPTH_CHANGE 20
-//#define OBJECT_SCALE 40
-#define BASE_OBJECT 1
-#define SIMPLE_OBJECT 2
-#define CORRECT 1
-#define INCORRECT 0
-#define SET_LEFT .33
-#define SET_RIGHT .66
+#define TEST_LENGTH             30
+//#define DEPTH_CHANGE          20
+//#define OBJECT_SCALE          40
+#define BASE_OBJECT             1
+#define SIMPLE_OBJECT           2
+#define CORRECT                 1
+#define INCORRECT               0
+#define SET_LEFT                0.33
+#define SET_RIGHT               0.66
 
 #define LEFT_NODE                0
 #define RIGHT_NODE               1
@@ -111,6 +111,8 @@ typedef enum {
 -(void)addCamera;
 -(void)addLamp;
 
+//loads all the lower-complexity Models into an array based on which model
+//the user has decided to test against
 -(void)initWithBunny;
 -(void)initWithBuddha;
 -(void)initWithDinosaur;

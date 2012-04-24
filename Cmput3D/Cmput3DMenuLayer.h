@@ -15,13 +15,13 @@
 #import "Cmput3DMenuLayer.h"
 
 //testing models - should be removed
-#define kBoxName				@"Box"
-#define kBeachBallName			@"BeachBall"
-#define kDieCubeName			@"Cube"
-
-#define kBallsFileName			@"Balls.pod"
-#define kMascotPODFile			@"cocos3dMascot.pod"
-#define kDieCubePODFile			@"DieCube.pod"
+//#define kBoxName				@"Box"
+//#define kBeachBallName			@"BeachBall"
+//#define kDieCubeName			@"Cube"
+//
+//#define kBallsFileName			@"Balls.pod"
+//#define kMascotPODFile			@"cocos3dMascot.pod"
+//#define kDieCubePODFile			@"DieCube.pod"
 
 // Model names
 #define kBuddhaName0            @"buddha-2983v"
@@ -106,7 +106,7 @@
 @interface Cmput3DMenuLayer : CC3Layer {
 }
 
-//returns the scene that is
+//returns a scene that the layer will run on
 +(CCScene*) scene;
 
 @end

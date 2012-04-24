@@ -3,7 +3,7 @@
 //  Cmput3D
 //
 //  Created by Greg Jaciuk on 12-03-17.
-//  Copyright __MyCompanyName__ 2012. All rights reserved.
+//  Copyright Greg Jaciuk 2012. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

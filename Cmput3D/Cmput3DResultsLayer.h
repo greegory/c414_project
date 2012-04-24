@@ -20,6 +20,8 @@
     CGSize windowSize;    
     
     CCLayer *labelLayer;
+    CGFloat label_scale;
+    NSString *device;
     
     CGFloat averageDepth;
     uint correctAnswers, incorrectAnswers;
@@ -29,18 +31,25 @@
 @property (nonatomic, retain) NSMutableArray *depthTracker;
 @property (nonatomic, retain) NSMutableArray *complexityTracker;
 
+//method needs to be called for anything to be displayed. It is passed all the
+//results from the cmput3dworld 
 -(void) initWithResults: (NSMutableArray*) selectionTrack 
                                   depth: (NSMutableArray*) depthTrack
                                    name: (NSMutableArray*) complexityTrack;
 -(void)addBackButton;
--(void)getResultsButton;
+//-(void)getResultsButton;
+//displays the results in console
 -(void)showResults;
 -(void)backToMenu: (CCMenuItem*) menuItem;
+//adds all the results as CCLabelBMFont labels to the display 
 -(void)results;
--(void)addLabels;
+//-(void)addLabels;
 
+// Creates a label to be used for results, adds it as a child to the
+// labelLayer (layer holding only the results labels) , and returns it.
 -(CCLabelBMFont*) addStatsLabel: (NSString*) labelText tag: (uint) aTag;
 
+//returns the scene this layer will run on
 -(CCScene*) scene;
 
 @end

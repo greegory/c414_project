@@ -17,19 +17,13 @@
 
 @implementation Cmput3DMenuLayer
 
-+(CCScene *) scene
-{
-	// 'scene' is an autorelease object.
++(CCScene *) scene{
+    
 	CCScene *scene = [CCScene node];
-	
-	// 'layer' is an autorelease object.
 	Cmput3DMenuLayer *layer = [Cmput3DMenuLayer node];
-	
-	// add layer as a child to scene
 	[scene addChild: layer];
-	
-	// return the scene
-	return scene;
+    
+    return scene;
 }
 
 -(void)setUpMenus{
@@ -63,26 +57,23 @@
                                                     target:self 
                                                   selector:@selector(worldWithDieCube:)];
     
-    // Create a menu and add menu items to it
 	CCMenu * myMenu = [CCMenu menuWithItems:menuItem1, menuItem2, menuItem3, nil];
     
-	// Arrange the menu items vertically
 	[myMenu alignItemsVertically];
     
     [myMenu setPosition: CGPointMake(window.width/2, window.height/2)];
     
-	// add the menu to the scene
 	[self addChild:myMenu];
 }
 
-// on "init" you need to initialize instance
+
 -(id) init
 {
 	// always call "super" init
 	// Apple recommends to re-assign "self" with the "super" return value
 	if( (self=[super initWithColor:ccc4(150, 108, 227, 255)])) {
         
-		[self initializeControls];
+		//[self initializeControls];
         [self setUpMenus];
         
         // register to receive targeted touch events
@@ -139,7 +130,7 @@
 }
 
 
-//Menu items
+//Menu items click events are handled
 - (void) worldWithBeachBall: (CCMenuItem  *) menuItem {
 	LogInfo(@"The Bunny menu was called");    
     [self worldWith:kBunnyName3];

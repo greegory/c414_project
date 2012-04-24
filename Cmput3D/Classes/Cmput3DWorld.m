@@ -54,8 +54,27 @@
         
         //Need to calculate the depth, change, and scale based on the screen size
         depth = 0.0;
-        depth_change = 20;
-        object_scale = 40;
+        
+        NSString *device = [[[UIDevice currentDevice] model] 
+                            stringByReplacingOccurrencesOfString:@" Simulator" 
+                            withString:@""];
+        
+        LogInfo(@"%@", device);
+        
+        if ([device isEqualToString:@"iPhone"]){ 
+            object_scale = 40;
+            depth_change = 20;
+        }
+        else if ([device isEqualToString:@"iPad"]){
+            object_scale = 80;
+            depth_change = 40;
+        }
+        else{
+            object_scale = 40;
+            depth_change = 20;        
+        }
+        
+        device = nil;
         
         testCount = 0;
         firstGuess = NO;
@@ -207,6 +226,7 @@
         
         nName = [leftNode.structureDescription stringByReplacingOccurrencesOfString:@"CC3PODMeshNode " withString:@""];
         nName = [nName stringByReplacingOccurrencesOfString:@" (POD index: 0)" withString:@""];
+        nName = [nName stringByReplacingOccurrencesOfString:@"-1" withString:@""];
         
         [selectionTracker addObject:[NSNumber numberWithInt:CORRECT]];
         [depthTracker addObject:[NSNumber numberWithFloat:depth]];
@@ -220,6 +240,7 @@
         
         nName = [rightNode.structureDescription stringByReplacingOccurrencesOfString:@"CC3PODMeshNode" withString:@""];       
         nName = [nName stringByReplacingOccurrencesOfString:@" (POD index: 0)" withString:@""];
+        nName = [nName stringByReplacingOccurrencesOfString:@"-2" withString:@""];
         
         [selectionTracker addObject:[NSNumber numberWithInt:CORRECT]];
         [depthTracker addObject:[NSNumber numberWithFloat:depth]];
@@ -231,6 +252,7 @@
     else if (leftNode.tag == BASE_OBJECT && choice == RIGHT_NODE){
         nName = [rightNode.structureDescription stringByReplacingOccurrencesOfString:@"CC3PODMeshNode" withString:@""];
         nName = [nName stringByReplacingOccurrencesOfString:@" (POD index: 0)" withString:@""]; 
+        nName = [nName stringByReplacingOccurrencesOfString:@"-1" withString:@""];
         
         [selectionTracker addObject:[NSNumber numberWithInt:INCORRECT]];
         [depthTracker addObject:[NSNumber numberWithFloat:depth]];
@@ -244,6 +266,7 @@
     else if (leftNode.tag == SIMPLE_OBJECT && choice == LEFT_NODE){
         nName = [leftNode.structureDescription stringByReplacingOccurrencesOfString:@"CC3PODMeshNode" withString:@""];
         nName = [nName stringByReplacingOccurrencesOfString:@" (POD index: 0)" withString:@""]; 
+        nName = [nName stringByReplacingOccurrencesOfString:@"-2" withString:@""];
         
         [selectionTracker addObject:[NSNumber numberWithInt:INCORRECT]];
         [depthTracker addObject:[NSNumber numberWithFloat:depth]];
@@ -278,15 +301,22 @@
                 LODidx -= 1;
         }
         else if (wrongGuess){
-            if (depth < 100.0)
+            // dino model scale is different that other two. Needs to stop
+            // coming closer at depth 60.0 instead of 100.0
+            if (currentNodeName == kDinoName0){
+                if (depth < 60.0)
+                    depth += depth_change;
+            }
+            else if (depth < 100.0)
                 depth += depth_change;
+            
             firstGuess = NO;
             secondGuess = NO;
             wrongGuess = NO;
             if (LODidx < [simpleNodes count]-1) 
                 LODidx += 1;
         }
-        LogInfo(@"%f", depth);
+        LogInfo(@"%.1f", depth);
     }
 }
 

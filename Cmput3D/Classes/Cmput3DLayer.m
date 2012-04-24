@@ -18,16 +18,17 @@
 -(BOOL) handleTouch: (UITouch*) touch ofType: (uint) touchType;
 
 @property (nonatomic, readonly) Cmput3DWorld* cmputWorld;
+
 @end
 
 @implementation Cmput3DLayer
 - (void)dealloc {    
+    [super dealloc];
+    
     backButton = nil;
     plusButton = nil;
     leftButton = nil;
     rightButton = nil;
-    
-    [super dealloc];
 }
 
 -(void) initializeControls {
