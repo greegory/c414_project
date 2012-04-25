@@ -17,7 +17,8 @@
     
     CCMenuItem *menuButton;
     CCMenuItem *resultsButton;
-    CGSize windowSize;    
+    CGSize windowSize; 
+    CGSize windowSizeInPixels;
     
     CCLayer *labelLayer;
     CGFloat label_scale;

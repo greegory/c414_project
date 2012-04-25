@@ -46,11 +46,14 @@
 // ipad width = 2.3375 times bigger
 // ipad height = 2.13 times bigger
 // ipad is 1024 x 768
-// iphone is 480 x 320
+// iphone3 is 480 x 320
+// iphone4 is 960 x 640 (however when you use winSize it returns iphone3 dimension
+//                       so winSizeInPixels needs to be used)
 -(void) initializeControls{
    
     windowSize = (CGSize)[[CCDirector sharedDirector] winSize];        
-
+    windowSizeInPixels = (CGSize)[[CCDirector sharedDirector] winSizeInPixels];
+    
     averageDepth = 0.0;
     correctAnswers = 0;
     incorrectAnswers = 0;
@@ -58,16 +61,22 @@
                     stringByReplacingOccurrencesOfString:@" Simulator" 
                     withString:@""];
    
+    int scaleNum = (windowSizeInPixels.height*windowSizeInPixels.width) / 3840;
     
-    if ([device isEqualToString:@"iPhone"]){ 
+//    if ([device isEqualToString:@"iPhone"]){ 
+//        label_scale = 1.8;
+//    }
+//    else if ([device isEqualToString:@"iPad"]){
+//        label_scale = 1.9;
+//    }
+//    else{
+//        label_scale = 0.8;       
+//    }
+    
+    if (scaleNum > 40)
+        label_scale = 1.8;
+    else
         label_scale = 0.8;
-    }
-    else if ([device isEqualToString:@"iPad"]){
-        label_scale = 1.9;
-    }
-    else{
-        label_scale = 0.8;       
-    }
     
     labelLayer = [[CCLayer alloc] init];
     
@@ -191,11 +200,11 @@
     
     label = [self addStatsLabel:sLabel tag:-1];
     
-    x = 40; y = 30;
+    x = 20; y = 30;
     label.position = ccp(x, y);
     [label setColor: ccYELLOW];
     
-    if ([device isEqualToString:@"iPad"])
+    if ((windowSizeInPixels.height*windowSizeInPixels.width/3840) > 40)
         [label setScale:2.5];
     else
         [label setScale:1];

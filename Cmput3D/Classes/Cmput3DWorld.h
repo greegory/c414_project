@@ -40,6 +40,10 @@ typedef enum {
 #define SET_LEFT                0.33
 #define SET_RIGHT               0.66
 
+#define LIGHT_SCALE             1
+#define LIGHT_OFFSET            20
+#define LIGHT_DEPTH             70
+
 #define LEFT_NODE                0
 #define RIGHT_NODE               1
 
@@ -55,6 +59,10 @@ typedef enum {
     NSString *currentNodeName; 
     CC3Camera *camera;
     CC3Light *lamp;
+//    CC3Light *lamp2;
+//    CC3Light *lamp3;
+//    CC3Light *lamp4;
+//    CC3Light *lamp5;
     CC3Node *origCamTarget;
 	CC3Node *camTarget;
     CC3Node *selectedNode; // The last node that was selected by the user touch

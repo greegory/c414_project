@@ -19,10 +19,17 @@
 @synthesize depthTracker;
 @synthesize complexityTracker;
 
+//TODO: Add more light
+//      Adjust models so they are viewed from the same angle
+
 -(void) dealloc {
 
     camera = nil;
     lamp = nil;
+//    lamp2 = nil;
+//    lamp3 = nil;
+//    lamp4 = nil;
+//    lamp5 = nil;
     currentNode = nil;
     currentNodeName = nil;
     camTarget = nil;
@@ -50,7 +57,7 @@
         
         selectedNode = nil;
         
-        windowSize = (CGSize)[[CCDirector sharedDirector] winSize];
+        windowSize = (CGSize)[[CCDirector sharedDirector] winSizeInPixels];
         
         //Need to calculate the depth, change, and scale based on the screen size
         depth = 0.0;
@@ -59,20 +66,26 @@
                             stringByReplacingOccurrencesOfString:@" Simulator" 
                             withString:@""];
         
-        LogInfo(@"%@", device);
+        //only works well for iphone 3 and 4. NOT ipad
+        object_scale = (windowSize.height*windowSize.width) / 3840;
+        if (object_scale != 40)
+            object_scale /= 2;
         
-        if ([device isEqualToString:@"iPhone"]){ 
-            object_scale = 40;
-            depth_change = 20;
-        }
-        else if ([device isEqualToString:@"iPad"]){
-            object_scale = 80;
-            depth_change = 40;
-        }
-        else{
-            object_scale = 40;
-            depth_change = 20;        
-        }
+        depth_change = object_scale/2;
+        
+        LogInfo(@"%@, %f", device, object_scale);
+//        if ([device isEqualToString:@"iPhone"]){ 
+//            object_scale = 40;
+//            depth_change = 20;
+//        }
+//        else if ([device isEqualToString:@"iPad"]){
+//            object_scale = 80;
+//            depth_change = 40;
+//        }
+//        else{
+//            object_scale = 40;
+//            depth_change = 20;        
+//        }
         
         device = nil;
         
@@ -209,12 +222,48 @@
 
 -(void) addLamp{
     
+    //Middle light
 	lamp = [CC3Light nodeWithName: @"Lamp"];
-	lamp.location = cc3v( windowSize.width/2, windowSize.height/2, depth+200 );
+	lamp.location = cc3v( windowSize.width/2, windowSize.height/2, depth+2000 );
 	lamp.isDirectionalOnly = NO;
-    lamp.uniformScale *= 100;
+    lamp.uniformScale *= LIGHT_SCALE;
 	[self addChild: lamp];
-    
+//    
+//    //top left light
+//    lamp2 = [CC3Light nodeWithName: @"Lamp"];
+//	lamp2.location = cc3v(windowSize.width-(windowSize.width-LIGHT_OFFSET), 
+//                          windowSize.height-LIGHT_OFFSET, 
+//                          depth+LIGHT_DEPTH );
+//	lamp2.isDirectionalOnly = NO;
+//    lamp2.uniformScale *= LIGHT_SCALE;
+//	[self addChild: lamp2];
+//    
+//    //top right light
+//    lamp3 = [CC3Light nodeWithName: @"Lamp"];
+//	lamp3.location = cc3v(windowSize.width-LIGHT_OFFSET, 
+//                          windowSize.height-LIGHT_OFFSET, 
+//                          depth+LIGHT_DEPTH );
+//	lamp3.isDirectionalOnly = NO;
+//    lamp3.uniformScale *= LIGHT_SCALE;
+//	[self addChild: lamp3];
+//    
+//    //bottom right light
+//    lamp4 = [CC3Light nodeWithName: @"Lamp"];
+//	lamp4.location = cc3v(windowSize.width-LIGHT_OFFSET,
+//                          windowSize.height-(windowSize.height-LIGHT_OFFSET), 
+//                          depth+LIGHT_DEPTH );
+//	lamp4.isDirectionalOnly = NO;
+//    lamp4.uniformScale *= LIGHT_SCALE;
+//	[self addChild: lamp4];
+//    
+//    //bottom left light
+//    lamp5 = [CC3Light nodeWithName: @"Lamp"];
+//	lamp5.location = cc3v(windowSize.width-(windowSize.width-LIGHT_OFFSET), 
+//                          windowSize.height-(windowSize.height-LIGHT_OFFSET), 
+//                          depth+LIGHT_DEPTH );
+//	lamp5.isDirectionalOnly = NO;
+//    lamp5.uniformScale *= LIGHT_SCALE;
+//	[self addChild: lamp5];
 }
 
 -(void) calculateGameLogic: (uint) choice{
@@ -323,17 +372,21 @@
 -(void) nextRound{
     
     int i = arc4random()%10;
-    CGFloat baseNodeOffset, simpleNodeOffset;
+    CGFloat baseNodeOffset, simpleNodeOffset, baseNodeRotate, simpleNodeRotate;
     
     [self removeAllChildren];
     
     if (i%2 == 0){
         baseNodeOffset = SET_LEFT;
         simpleNodeOffset = SET_RIGHT;
+        baseNodeRotate = 30.0;
+        simpleNodeRotate = 20.0;
     }
     else {
         baseNodeOffset = SET_RIGHT;
         simpleNodeOffset = SET_LEFT;
+        baseNodeRotate = 20.0;
+        simpleNodeRotate = 30.0;
     }
     
     CC3Node *aNode = [(CC3Node*)[templateNodes objectAtIndex:currentNodeIdx] copyAutoreleased];
@@ -342,6 +395,7 @@
     aNode.uniformScale *= object_scale;
     aNode.isTouchEnabled = YES;
     aNode.tag = BASE_OBJECT;
+    [aNode rotateBy:cc3v(0.0,baseNodeRotate,0.0)];
     
     CC3Node *aNode2 = [(CC3Node*)[simpleNodes objectAtIndex: LODidx] copyAutoreleased];
     
@@ -349,7 +403,8 @@
     aNode2.uniformScale *= object_scale;
     aNode2.isTouchEnabled = YES;
     aNode2.tag = SIMPLE_OBJECT;
-     
+    [aNode2 rotateBy:cc3v(0.0,simpleNodeRotate,0.0)];
+    
     if (baseNodeOffset < 0.5){
         leftNode = aNode;
         rightNode = aNode2;
@@ -410,13 +465,13 @@
 	GLfloat angle = ccpLength(swipe2d) * kSwipeScale;
 
 	for (CC3Node* node in children) {
-        if (node == selectedNode){
+//        if (node == selectedNode){
 //            CCActionInterval* partialRot = [CC3RotateBy actionWithDuration: 1.0
 //                                                        rotateBy: cc3v(0.0,30,0.0)];   
 //            [node runAction: [CCRepeatForever actionWithAction: partialRot]];
             [node rotateByAngle: angle aroundAxis: axis];
             
-        }
+//        }
     }
     
 }
